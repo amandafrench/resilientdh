@@ -1,0 +1,316 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: fBlogging Theme\n"
+"POT-Creation-Date: 2016-07-07 22:25+0200\n"
+"PO-Revision-Date: 2016-07-07 22:25+0200\n"
+"Last-Translator: \n"
+"Language-Team: Tishonator Theme <info@tishonator.com>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;esc_html__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../404.php:20
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: ../404.php:24
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr ""
+
+#: ../search.php:18
+#, php-format
+msgid "You searched for \"%s\". Here are the results:"
+msgstr ""
+
+#: ../searchform.php:19
+msgid "Search..."
+msgstr ""
+
+#: ../single.php:32
+msgid "Pages:"
+msgstr ""
+
+#: ../footer.php:33
+msgid "fBlogging Theme"
+msgstr ""
+
+#: ../footer.php:34
+msgid "WordPress"
+msgstr ""
+
+#: ../comments.php:53
+#: ../template-parts/content-page.php:35
+#: ../template-parts/content.php:68
+msgid "Comments are closed."
+msgstr ""
+
+#: ../functions.php:65
+msgid "Primary Menu"
+msgstr ""
+
+#: ../functions.php:66
+msgid "Footer Menu"
+msgstr ""
+
+#: ../functions.php:126
+msgid "Social Sites"
+msgstr ""
+
+#: ../functions.php:133
+msgid "Facebook Page URL"
+msgstr ""
+
+#: ../functions.php:137
+msgid "Google+ Page URL"
+msgstr ""
+
+#: ../functions.php:141
+msgid "Twitter URL"
+msgstr ""
+
+#: ../functions.php:145
+msgid "LinkedIn"
+msgstr ""
+
+#: ../functions.php:149
+msgid "Instagram"
+msgstr ""
+
+#: ../functions.php:153
+msgid "RSS Feeds URL"
+msgstr ""
+
+#: ../functions.php:157
+msgid "Tumblr"
+msgstr ""
+
+#: ../functions.php:161
+msgid "YouTube channel URL"
+msgstr ""
+
+#: ../functions.php:165
+msgid "Pinterest"
+msgstr ""
+
+#: ../functions.php:169
+msgid "VK"
+msgstr ""
+
+#: ../functions.php:173
+msgid "Flickr"
+msgstr ""
+
+#: ../functions.php:177
+msgid "Vine"
+msgstr ""
+
+#: ../functions.php:185
+msgid "Slider"
+msgstr ""
+
+#: ../functions.php:201
+msgid "Display Slider"
+msgstr ""
+
+#: ../functions.php:219
+msgid "Slide 1 Image"
+msgstr ""
+
+#: ../functions.php:236
+msgid "Slide 2 Image"
+msgstr ""
+
+#: ../functions.php:253
+msgid "Slide 3 Image"
+msgstr ""
+
+#: ../functions.php:266
+msgid "Footer"
+msgstr ""
+
+#: ../functions.php:282
+msgid "Copyright Text"
+msgstr ""
+
+#: ../functions.php:423
+msgid "Sidebar Widget Area"
+msgstr ""
+
+#: ../functions.php:425
+msgid "The sidebar widget area"
+msgstr ""
+
+#: ../functions.php:467
+msgid "Next"
+msgstr ""
+
+#: ../functions.php:468
+msgid "Previous"
+msgstr ""
+
+#: ../functions.php:527
+msgid "Follow us on Facebook"
+msgstr ""
+
+#: ../functions.php:529
+msgid "Follow us on Google+"
+msgstr ""
+
+#: ../functions.php:531
+msgid "Follow us on Twitter"
+msgstr ""
+
+#: ../functions.php:533
+msgid "Follow us on LinkedIn"
+msgstr ""
+
+#: ../functions.php:535
+msgid "Follow us on Instagram"
+msgstr ""
+
+#: ../functions.php:537
+msgid "Follow our RSS Feeds"
+msgstr ""
+
+#: ../functions.php:539
+msgid "Follow us on Tumblr"
+msgstr ""
+
+#: ../functions.php:541
+msgid "Follow us on Youtube"
+msgstr ""
+
+#: ../functions.php:543
+msgid "Follow us on Pinterest"
+msgstr ""
+
+#: ../functions.php:545
+msgid "Follow us on VK"
+msgstr ""
+
+#: ../functions.php:547
+msgid "Follow us on Flickr"
+msgstr ""
+
+#: ../functions.php:549
+msgid "Follow us on Vine"
+msgstr ""
+
+#: ../functions.php:561
+msgid "Demo Premium version"
+msgstr ""
+
+#: ../functions.php:562
+msgid "Get Premium version"
+msgstr ""
+
+#: ../template-parts/content-none.php:17
+msgid "Oh no! Article not found! 404 error!"
+msgstr ""
+
+#: ../template-parts/content-none.php:21
+msgid "No Results Found!"
+msgstr ""
+
+#: ../template-parts/content-none.php:26
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: ../template-parts/content-page.php:24
+#: ../template-parts/content.php:87
+msgid "Read More..."
+msgstr ""
+
+#: ../template-parts/content-page.php:35
+#: ../template-parts/content.php:68
+msgid "No Comments"
+msgstr ""
+
+#: ../template-parts/content-page.php:35
+#: ../template-parts/content.php:68
+msgid "1 Comment"
+msgstr ""
+
+#: ../template-parts/content-page.php:35
+#: ../template-parts/content.php:68
+msgid "% Comments"
+msgstr ""
+
+#: ../template-parts/content-page.php:40
+#: ../template-parts/content.php:73
+msgid "Edit"
+msgstr ""
+
+#: ../template-parts/content.php:102
+msgid "Read More"
+msgstr ""
+
+#: ../template-parts/content.php:114
+msgid "Categories:"
+msgstr ""
+
+#: ../template-parts/content.php:121
+msgid "Tags:"
+msgstr ""
+
+#: functions.php:255
+msgid "Footer Column #1"
+msgstr ""
+
+#: functions.php:257
+msgid "The Footer Column #1 widget area"
+msgstr ""
+
+#: functions.php:266
+msgid "Footer Column #2"
+msgstr ""
+
+#: functions.php:268
+msgid "The Footer Column #2 widget area"
+msgstr ""
+
+#: functions.php:277
+msgid "Footer Column #3"
+msgstr ""
+
+#: functions.php:279
+msgid "The Footer Column #3 widget area"
+msgstr ""
+
+#: sidebar-footer.php:26
+msgid "Footer Col Widget 1"
+msgstr ""
+
+#: sidebar-footer.php:33
+msgid ""
+"This is first footer widget area. To customize it, please navigate to Admin "
+"Panel -> Appearance -> Widgets and add widgets to Footer Column #1."
+msgstr ""
+
+#: sidebar-footer.php:50
+msgid "Footer Col Widget 2"
+msgstr ""
+
+#: sidebar-footer.php:57
+msgid ""
+"This is second footer widget area. To customize it, please navigate to Admin "
+"Panel -> Appearance -> Widgets and add widgets to Footer Column #2."
+msgstr ""
+
+#: sidebar-footer.php:74
+msgid "Footer Col Widget 3"
+msgstr ""
+
+#: sidebar-footer.php:81
+msgid ""
+"This is third footer widget area. To customize it, please navigate to Admin "
+"Panel -> Appearance -> Widgets and add widgets to Footer Column #3."
+msgstr ""
