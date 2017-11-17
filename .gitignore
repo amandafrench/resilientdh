@@ -12,6 +12,7 @@ env.php
 wp-app.php
 wp-config-sample.php
 wp-config.php
+phpmyadmin
 phpmyadmin/*
 
 # Exclude cache and other files in /wp-content 
