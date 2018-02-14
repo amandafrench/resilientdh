@@ -683,11 +683,11 @@ function bp_get_group_type( $group = false ) {
 	}
 
 	if ( 'public' == $group->status ) {
-		$type = __( "Public Group", 'buddypress' );
+		$type = __( "Public Project", 'buddypress' );
 	} elseif ( 'hidden' == $group->status ) {
-		$type = __( "Hidden Group", 'buddypress' );
+		$type = __( "Hidden Project", 'buddypress' );
 	} elseif ( 'private' == $group->status ) {
-		$type = __( "Private Group", 'buddypress' );
+		$type = __( "Private Project", 'buddypress' );
 	} else {
 		$type = ucwords( $group->status ) . ' ' . __( 'Group', 'buddypress' );
 	}
