@@ -18,7 +18,7 @@ get_header( 'buddypress' ); ?>
 
 		<form action="" method="post" id="groups-directory-form" class="dir-form">
 
-			<h3><?php _e( 'Projects Directory', 'buddypress' ); ?><?php if ( is_user_logged_in() && bp_user_can_create_groups() ) : ?> &nbsp;<a class="button" href="<?php echo trailingslashit( bp_get_root_domain() . '/' . bp_get_groups_root_slug() . '/create' ); ?>"><?php _e( 'Create a Project', 'buddypress' ); ?></a><?php endif; ?></h3>
+			<h1 class="page-title"><?php _e( 'Projects Directory', 'buddypress' ); ?><?php if ( is_user_logged_in() && bp_user_can_create_groups() ) : ?> &nbsp;<a class="button" href="<?php echo trailingslashit( bp_get_root_domain() . '/' . bp_get_groups_root_slug() . '/create' ); ?>"><?php _e( 'Create a Project', 'buddypress' ); ?></a><?php endif; ?></h1>
 
 			<?php do_action( 'bp_before_directory_groups_content' ); ?>
 

@@ -1,7 +1,7 @@
 === Very Simple Contact Form ===
 Contributors: Guido07111975
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donation%40guidovanderleest%2enl
-Version: 7.2
+Version: 7.3
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 3.7
@@ -37,7 +37,6 @@ By default form submissions will be send to your site's admin email address (set
 * Send to multiple email addresses: `[contact email_to="first-email-here, second-email-here"]`
 * Change default "From" email header: `[contact from_header="your-email-here"]`
 * Change default email subject: `[contact subject="your subject here"]`
-* Change default email subject prefix: `[contact prefix_subject="your prefix here"]`
 * Activate confirmation email to sender: `[contact auto_reply="true"]`
 * Change default "thank you" message in confirmation email: `[contact auto_reply_message="your message here"]`
 * Hide subject field: `[contact hide_subject="true"]`
@@ -117,9 +116,9 @@ Plugin will use the site language, set in Settings > General.
 If plugin isn't translated into this language, language fallback will be English.
 
 = What is the default email subject? =
-By default the email subject contains a prefix (name of your site) followed by the subject that sender has entered. If subject field is hidden it only contains a prefix.
+By default the email subject contains the name of your site followed by the subject that sender has entered. If subject field is hidden it only contains the name of your site.
 
-You can change the prefix or whole subject using an attribute. Changing whole subject means that prefix will not be part of the subject anymore.
+You can change this subject using an attribute. 
 
 Note: this subject will also be used in the confirmation email to sender (if activated).
 
@@ -180,6 +179,11 @@ Please open a topic in plugin forum.
 
 
 == Changelog ==
+= Version 7.3 =
+* removed attribute to change default email subject prefix: prefix_subject
+* from now on you can only change whole email subject using attribute: subject
+* have removed this to avoid confusion while setting up a custom email subject
+
 = Version 7.2 =
 * updated file vscf-style
 * files vscf-form and vscf-widget-form: added escaping to empty variables
@@ -200,10 +204,6 @@ Please open a topic in plugin forum.
 * this means I have added bootstrap css classes
 * updated files vscf-form and vscf-widget-form
 * updated file vscf-style
-
-= Version 6.8 =
-* best practice: removed closing PHP tag from most files
-* best practice: added newline at end of most files
 
 For all versions please check file changelog.
 
