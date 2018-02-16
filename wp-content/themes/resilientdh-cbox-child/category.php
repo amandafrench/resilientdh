@@ -18,7 +18,7 @@
 			do_action( 'open_content' );
 			do_action( 'open_category' );
 		?>
-				<h1 class="page-title">Opportunities</h1>		
+				<h1 class="page-title"><?php single_cat_title(); ?></h1>		
 
 		<div class="page" id="blog-category">
 			<?php
