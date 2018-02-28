@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+= Version 7.4 =
+* file vscf-widget-form: fixed mistake in resetting captcha (thanks malae) 
+
 = Version 7.3 =
 * removed attribute to change default email subject prefix: prefix_subject
 * from now on you can only change whole email subject using attribute: subject

@@ -213,7 +213,7 @@ function vscf_widget_shortcode($vscf_atts) {
 	
 	// After form validation
 	if ($sent == true) {
-		unset($_SESSION['vscf-rand']);
+		unset($_SESSION['vscf-widget-rand']);
 		return $anchor_begin . '<p class="vscf-info">'.esc_attr($result).'</p>' . $anchor_end;
 	} elseif ($fail == true) {
 		return $anchor_begin . '<p class="vscf-info">'.esc_attr($result).'</p>' . $anchor_end;

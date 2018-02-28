@@ -1,7 +1,7 @@
 === Very Simple Contact Form ===
 Contributors: Guido07111975
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donation%40guidovanderleest%2enl
-Version: 7.3
+Version: 7.4
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 3.7
@@ -116,7 +116,7 @@ Plugin will use the site language, set in Settings > General.
 If plugin isn't translated into this language, language fallback will be English.
 
 = What is the default email subject? =
-By default the email subject contains the name of your site followed by the subject that sender has entered. If subject field is hidden it only contains the name of your site.
+By default the email subject contains the name of your site, followed by the subject that sender has filled in. If subject field is hidden it only contains the name of your site.
 
 You can change this subject using an attribute. 
 
@@ -179,6 +179,9 @@ Please open a topic in plugin forum.
 
 
 == Changelog ==
+= Version 7.4 =
+* file vscf-widget-form: fixed mistake in resetting captcha (thanks malae) 
+
 = Version 7.3 =
 * removed attribute to change default email subject prefix: prefix_subject
 * from now on you can only change whole email subject using attribute: subject
@@ -198,12 +201,6 @@ Please open a topic in plugin forum.
 
 = Version 7.0 =
 * minor change in files vscf-form and vscf-widget-form
-
-= Version 6.9 =
-* form now supports bootstrap css
-* this means I have added bootstrap css classes
-* updated files vscf-form and vscf-widget-form
-* updated file vscf-style
 
 For all versions please check file changelog.
 
