@@ -331,7 +331,8 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false 
 									continue;
 								}
 								elseif( strtolower( $headers[ $i ] ) == "user_pass" ){ // hashed pass
-							        wp_insert_user( array( 'ID' => $user_id, 'user_pass' => $data[ $i ] ) );
+									$wpdb->update( $wpdb->users, array( 'user_pass' => wp_slash( $data[ $i ] ) ), array( 'ID' => $user_id ) );
+									wp_cache_delete( $user_id, 'users' );
 							        continue;
 								}
 								elseif( in_array( $headers[ $i ], $wp_users_fields ) ){ // wp_user data									
@@ -536,7 +537,10 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false 
 			if( $is_cron && get_option( "acui_cron_delete_users" ) ):
 				require_once( ABSPATH . 'wp-admin/includes/user.php');	
 
-				$all_users = get_users( array( 'fields' => array( 'ID' ) ) );
+				$all_users = get_users( array( 
+					'fields' => array( 'ID' ),
+					'role__not_in' => array( 'administrator' )
+				) );
 				$cron_delete_users_assign_posts = get_option( "acui_cron_delete_users_assign_posts");
 
 				foreach ( $all_users as $user ) {

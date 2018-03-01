@@ -4,7 +4,7 @@ Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
 Tested up to: 4.9.4
-Stable tag: 1.10.10
+Stable tag: 1.10.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,10 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.10.11 =
+*	Administrator are not deleted in cron task
+*	Some hashed passwords was not being imported correctly because of wp_unslash() function into wp_insert_user(), issue fixed
 
 = 1.10.10 =
 *	Thanks to Attainable Adventure Cruising Ltd now the system to import passwords hashed directly from the CSV has been fixed

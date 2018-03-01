@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.10.10
+Version:		1.10.11
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
