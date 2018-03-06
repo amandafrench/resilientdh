@@ -60,8 +60,18 @@ add_action( 'groups_created_group',  'group_header_fields_save' );
 
 // Show the custom field in the group header
 function show_field_in_header( ) {
-echo "<br /><span class='highlight'>URL: " . "<a href='" . custom_field('rnidh-project-url') . "'>" . custom_field('rnidh-project-url') . "</a></span>";
-echo "<br /><span class='highlight'>Timeline: " . custom_field('rnidh-project-timeline') . "</span>";
+
+if (custom_field('rnidh-project-url') == null) 
+
+echo ' '; 
+
+else echo "<br /><span class='highlight'>URL: " . "<a href='" . custom_field('rnidh-project-url') . "'>" . custom_field('rnidh-project-url') . "</a></span>";
+
+if (custom_field('rnidh-project-timeline') == null) 
+
+echo ' '; 
+
+else echo "<br /><span class='highlight'>Timeline: " . custom_field('rnidh-project-timeline') . "</span>";
 
 }
 add_action('bp_before_group_header_meta' , 'show_field_in_header') ;
