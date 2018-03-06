@@ -2779,11 +2779,11 @@ msgstr ""
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/delete-group.php:11
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/delete-group.php:38
 msgid "Delete Group"
-msgstr ""
+msgstr "Delete Project"
 
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/cover-images/index.php:30
 msgid "Delete Group Cover Image"
-msgstr ""
+msgstr "Delete Project Cover Image"
 
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-avatar.php:31
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/avatars/index.php:41
