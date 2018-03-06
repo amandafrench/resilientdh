@@ -8367,7 +8367,7 @@ msgstr ""
 
 #: bp-groups/classes/class-bp-groups-widget.php:163
 msgid "There are no groups to display."
-msgstr ""
+msgstr "There are no projects to display."
 
 #: bp-themes/bp-default/groups/single/admin.php:335
 #: bp-templates/bp-legacy/buddypress/groups/single/requests-loop.php:95
@@ -8722,7 +8722,7 @@ msgstr ""
 #: bp-themes/bp-default/groups/groups-loop.php:95
 #: bp-templates/bp-legacy/buddypress/groups/groups-loop.php:135
 msgid "There were no groups found."
-msgstr ""
+msgstr "There were no projects found."
 
 #: bp-members/bp-members-widgets.php:101 bp-friends/bp-friends-widgets.php:89
 msgid "There were no members found, please try another filter."
@@ -9982,7 +9982,7 @@ msgstr ""
 #: bp-xprofile/bp-xprofile-admin.php:274
 msgctxt "You have no profile fields groups."
 msgid "You have no groups."
-msgstr ""
+msgstr "You have no projects."
 
 #: bp-themes/bp-default/members/single/notifications/feedback-no-notifications.php:7
 #: bp-templates/bp-legacy/buddypress/members/single/notifications/feedback-no-notifications.php:16
