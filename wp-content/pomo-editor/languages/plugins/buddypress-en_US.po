@@ -1534,12 +1534,12 @@ msgstr ""
 #: bp-groups/bp-groups-admin.php:33
 msgctxt "Admin Groups menu"
 msgid "Groups"
-msgstr ""
+msgstr "Projects"
 
 #: bp-groups/bp-groups-admin.php:32
 msgctxt "Admin Groups page title"
 msgid "Groups"
-msgstr ""
+msgstr "Projects"
 
 #: bp-core/deprecated/2.1.php:364 bp-core/deprecated/2.1.php:493
 msgid "Admin Options"
