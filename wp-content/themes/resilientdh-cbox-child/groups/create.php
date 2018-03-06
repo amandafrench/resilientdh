@@ -1,7 +1,7 @@
 <?php
 
 /**
- * BuddyPress - Create Project
+ * BuddyPress - Create Group
  *
  * @package BuddyPress
  * @subpackage bp-default
@@ -15,7 +15,7 @@ get_header( 'buddypress' ); ?>
 		<?php do_action( 'bp_before_create_group_content_template' ); ?>
 
 		<form action="<?php bp_group_creation_form_action(); ?>" method="post" id="create-group-form" class="standard-form" enctype="multipart/form-data">
-			<h3><?php _e( 'Create a Project', 'buddypress' ); ?> &nbsp;<a class="button" href="<?php echo trailingslashit( bp_get_root_domain() . '/' . bp_get_groups_root_slug() ); ?>"><?php _e( 'Projects Directory', 'buddypress' ); ?></a></h3>
+			<h3><?php _e( 'Create a Group', 'buddypress' ); ?> &nbsp;<a class="button" href="<?php echo trailingslashit( bp_get_root_domain() . '/' . bp_get_groups_root_slug() ); ?>"><?php _e( 'Groups Directory', 'buddypress' ); ?></a></h3>
 
 			<?php do_action( 'bp_before_create_group' ); ?>
 
@@ -31,15 +31,15 @@ get_header( 'buddypress' ); ?>
 
 			<div class="item-body" id="group-create-body">
 
-				<?php /* Project creation step 1: Basic project details */ ?>
+				<?php /* Group creation step 1: Basic group details */ ?>
 				<?php if ( bp_is_group_creation_step( 'group-details' ) ) : ?>
 
 					<?php do_action( 'bp_before_group_details_creation_step' ); ?>
 
-					<label for="group-name"><?php _e( 'Project Name (required)', 'buddypress' ); ?></label>
+					<label for="group-name"><?php _e( 'Group Name (required)', 'buddypress' ); ?></label>
 					<input type="text" name="group-name" id="group-name" aria-required="true" value="<?php bp_new_group_name(); ?>" />
 
-					<label for="group-desc"><?php _e( 'Project Description (required)', 'buddypress' ); ?></label>
+					<label for="group-desc"><?php _e( 'Group Description (required)', 'buddypress' ); ?></label>
 					<textarea name="group-desc" id="group-desc" aria-required="true"><?php bp_new_group_description(); ?></textarea>
 
 					<?php
@@ -50,7 +50,7 @@ get_header( 'buddypress' ); ?>
 
 				<?php endif; ?>
 
-				<?php /* Project creation step 2: Project settings */ ?>
+				<?php /* Group creation step 2: Group settings */ ?>
 				<?php if ( bp_is_group_creation_step( 'group-settings' ) ) : ?>
 
 					<?php do_action( 'bp_before_group_settings_creation_step' ); ?>
@@ -59,68 +59,68 @@ get_header( 'buddypress' ); ?>
 
 					<div class="radio">
 						<label><input type="radio" name="group-status" value="public"<?php if ( 'public' == bp_get_new_group_status() || !bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> />
-							<strong><?php _e( 'This is a public project', 'buddypress' ); ?></strong>
+							<strong><?php _e( 'This is a public group', 'buddypress' ); ?></strong>
 							<ul>
-								<li><?php _e( 'Any site member can join this project.', 'buddypress' ); ?></li>
-								<li><?php _e( 'This project will be listed in the projects directory and in search results.', 'buddypress' ); ?></li>
-								<li><?php _e( 'Project content and activity will be visible to any site member.', 'buddypress' ); ?></li>
+								<li><?php _e( 'Any site member can join this group.', 'buddypress' ); ?></li>
+								<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
+								<li><?php _e( 'Group content and activity will be visible to any site member.', 'buddypress' ); ?></li>
 							</ul>
 						</label>
 
 						<label><input type="radio" name="group-status" value="private"<?php if ( 'private' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> />
-							<strong><?php _e( 'This is a private project', 'buddypress' ); ?></strong>
+							<strong><?php _e( 'This is a private group', 'buddypress' ); ?></strong>
 							<ul>
-								<li><?php _e( 'Only users who request membership and are accepted can join the project.', 'buddypress' ); ?></li>
-								<li><?php _e( 'This project will be listed in the projects directory and in search results.', 'buddypress' ); ?></li>
-								<li><?php _e( 'Project content and activity will only be visible to members of the project.', 'buddypress' ); ?></li>
+								<li><?php _e( 'Only users who request membership and are accepted can join the group.', 'buddypress' ); ?></li>
+								<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
+								<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
 							</ul>
 						</label>
 
 						<label><input type="radio" name="group-status" value="hidden"<?php if ( 'hidden' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> />
-							<strong><?php _e('This is a hidden project', 'buddypress'); ?></strong>
+							<strong><?php _e('This is a hidden group', 'buddypress'); ?></strong>
 							<ul>
-								<li><?php _e( 'Only users who are invited can join the project.', 'buddypress' ); ?></li>
-								<li><?php _e( 'This project will not be listed in the projects directory or search results.', 'buddypress' ); ?></li>
-								<li><?php _e( 'Project content and activity will only be visible to members of the project.', 'buddypress' ); ?></li>
+								<li><?php _e( 'Only users who are invited can join the group.', 'buddypress' ); ?></li>
+								<li><?php _e( 'This group will not be listed in the groups directory or search results.', 'buddypress' ); ?></li>
+								<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
 							</ul>
 						</label>
 					</div>
 
-					<h4><?php _e( 'Project Invitations', 'buddypress' ); ?></h4>
+					<h4><?php _e( 'Group Invitations', 'buddypress' ); ?></h4>
 
-					<p><?php _e( 'Which members of this project are allowed to invite others?', 'buddypress' ); ?></p>
+					<p><?php _e( 'Which members of this group are allowed to invite others?', 'buddypress' ); ?></p>
 
 					<div class="radio">
 						<label>
 							<input type="radio" name="group-invite-status" value="members"<?php bp_group_show_invite_status_setting( 'members' ); ?> />
-							<strong><?php _e( 'All project members', 'buddypress' ); ?></strong>
+							<strong><?php _e( 'All group members', 'buddypress' ); ?></strong>
 						</label>
 
 						<label>
 							<input type="radio" name="group-invite-status" value="mods"<?php bp_group_show_invite_status_setting( 'mods' ); ?> />
-							<strong><?php _e( 'Project admins and mods only', 'buddypress' ); ?></strong>
+							<strong><?php _e( 'Group admins and mods only', 'buddypress' ); ?></strong>
 						</label>
 
 						<label>
 							<input type="radio" name="group-invite-status" value="admins"<?php bp_group_show_invite_status_setting( 'admins' ); ?> />
-							<strong><?php _e( 'Project admins only', 'buddypress' ); ?></strong>
+							<strong><?php _e( 'Group admins only', 'buddypress' ); ?></strong>
 						</label>
 					</div>
 
 					<?php if ( bp_is_active( 'forums' ) ) : ?>
 
-						<h4><?php _e( 'Project Forums', 'buddypress' ); ?></h4>
+						<h4><?php _e( 'Group Forums', 'buddypress' ); ?></h4>
 
 						<?php if ( bp_forums_is_installed_correctly() ) : ?>
 
-							<p><?php _e( 'Should this project have a forum?', 'buddypress' ); ?></p>
+							<p><?php _e( 'Should this group have a forum?', 'buddypress' ); ?></p>
 
 							<div class="checkbox">
 								<label><input type="checkbox" name="group-show-forum" id="group-show-forum" value="1"<?php checked( bp_get_new_group_enable_forum(), true, true ); ?> /> <?php _e( 'Enable discussion forum', 'buddypress' ); ?></label>
 							</div>
 						<?php elseif ( is_super_admin() ) : ?>
 
-							<p><?php printf( __( '<strong>Attention Site Admin:</strong> Project forums require the <a href="%s">correct setup and configuration</a> of a bbPress installation.', 'buddypress' ), bp_core_do_network_admin() ? network_admin_url( 'settings.php?page=bb-forums-setup' ) :  admin_url( 'admin.php?page=bb-forums-setup' ) ); ?></p>
+							<p><?php printf( __( '<strong>Attention Site Admin:</strong> Group forums require the <a href="%s">correct setup and configuration</a> of a bbPress installation.', 'buddypress' ), bp_core_do_network_admin() ? network_admin_url( 'settings.php?page=bb-forums-setup' ) :  admin_url( 'admin.php?page=bb-forums-setup' ) ); ?></p>
 
 						<?php endif; ?>
 
@@ -132,7 +132,7 @@ get_header( 'buddypress' ); ?>
 
 				<?php endif; ?>
 
-				<?php /* Project creation step 3: Avatar Uploads */ ?>
+				<?php /* Group creation step 3: Avatar Uploads */ ?>
 				<?php if ( bp_is_group_creation_step( 'group-avatar' ) ) : ?>
 
 					<?php do_action( 'bp_before_group_avatar_creation_step' ); ?>
@@ -146,7 +146,7 @@ get_header( 'buddypress' ); ?>
 						</div><!-- .left-menu -->
 
 						<div class="main-column">
-							<p><?php _e( "Upload an image to use as an avatar for this project. The image will be shown on the main project page, and in search results.", 'buddypress' ); ?></p>
+							<p><?php _e( "Upload an image to use as an avatar for this group. The image will be shown on the main group page, and in search results.", 'buddypress' ); ?></p>
 
 							<p>
 								<input type="file" name="file" id="file" />
@@ -161,7 +161,7 @@ get_header( 'buddypress' ); ?>
 
 					<?php if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
 
-						<h3><?php _e( 'Crop Project Avatar', 'buddypress' ); ?></h3>
+						<h3><?php _e( 'Crop Group Avatar', 'buddypress' ); ?></h3>
 
 						<img src="<?php bp_avatar_to_crop(); ?>" id="avatar-to-crop" class="avatar" alt="<?php _e( 'Avatar to crop', 'buddypress' ); ?>" />
 
@@ -186,7 +186,7 @@ get_header( 'buddypress' ); ?>
 
 				<?php endif; ?>
 
-				<?php /* Project creation step 4: Invite friends to project */ ?>
+				<?php /* Group creation step 4: Invite friends to group */ ?>
 				<?php if ( bp_is_group_creation_step( 'group-invites' ) ) : ?>
 
 					<?php do_action( 'bp_before_group_invites_creation_step' ); ?>
@@ -243,7 +243,7 @@ get_header( 'buddypress' ); ?>
 					<?php else : ?>
 
 						<div id="message" class="info">
-							<p><?php _e( 'Once you have built up friend connections you will be able to invite others to your project.', 'buddypress' ); ?></p>
+							<p><?php _e( 'Once you have built up friend connections you will be able to invite others to your group.', 'buddypress' ); ?></p>
 						</div>
 
 					<?php endif; ?>
@@ -254,7 +254,7 @@ get_header( 'buddypress' ); ?>
 
 				<?php endif; ?>
 
-				<?php do_action( 'groups_custom_create_steps' ); // Allow plugins to add custom project creation steps ?>
+				<?php do_action( 'groups_custom_create_steps' ); // Allow plugins to add custom group creation steps ?>
 
 				<?php do_action( 'bp_before_group_creation_step_buttons' ); ?>
 
@@ -279,7 +279,7 @@ get_header( 'buddypress' ); ?>
 						<?php /* Create Button */ ?>
 						<?php if ( bp_is_first_group_creation_step() ) : ?>
 
-							<input type="submit" value="<?php _e( 'Create Project and Continue', 'buddypress' ); ?>" id="group-creation-create" name="save" />
+							<input type="submit" value="<?php _e( 'Create Group and Continue', 'buddypress' ); ?>" id="group-creation-create" name="save" />
 
 						<?php endif; ?>
 

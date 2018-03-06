@@ -1630,17 +1630,17 @@ msgstr ""
 #: bp-templates/bp-legacy/buddypress/groups/create.php:182
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:104
 msgid "All group members"
-msgstr ""
+msgstr "All project members"
 
 #: bp-templates/bp-legacy/buddypress/groups/index.php:61
 #, php-format
 msgid "All Groups %s"
-msgstr ""
+msgstr "All Projects %s"
 
 #: bp-themes/bp-default/groups/index.php:35
 #, php-format
 msgid "All Groups <span>%s</span>"
-msgstr ""
+msgstr "All Projects <span>%s</span>"
 
 #: bp-messages/classes/class-bp-messages-component.php:323
 msgid "All Member Notices"
@@ -1785,7 +1785,7 @@ msgstr ""
 #: bp-templates/bp-legacy/buddypress/groups/create.php:123
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:45
 msgid "Any site member can join this group."
-msgstr ""
+msgstr "Any site member can join this project."
 
 #: bp-core/deprecated/1.5.php:189
 #: bp-themes/bp-default/members/single/profile/profile-wp.php:51
@@ -2540,7 +2540,7 @@ msgstr ""
 #: bp-themes/bp-default/groups/index.php:21
 #: bp-themes/bp-default/groups/create.php:18
 msgid "Create a Group"
-msgstr ""
+msgstr "Create a Project"
 
 #: bp-blogs/bp-blogs-template.php:1269 bp-blogs/bp-blogs-template.php:1355
 #: bp-core/bp-core-template.php:3206
@@ -4138,18 +4138,18 @@ msgstr ""
 #. accessibility text
 #: bp-groups/bp-groups-admin.php:609
 msgid "Group Name"
-msgstr ""
+msgstr "Project Name"
 
 #: bp-themes/bp-default/groups/create.php:39
 #: bp-themes/bp-default/groups/single/admin.php:16
 #: bp-templates/bp-legacy/buddypress/groups/create.php:74
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/edit-details.php:22
 msgid "Group Name (required)"
-msgstr ""
+msgstr "Project Name (required)"
 
 #: bp-groups/bp-groups-admin.php:532
 msgid "Group name, slug, and description are all required fields."
-msgstr ""
+msgstr "Project name, slug, and description are all required fields."
 
 #: bp-groups/classes/class-bp-groups-template.php:296
 msgctxt "Group pagination next text"
@@ -4163,15 +4163,15 @@ msgstr ""
 
 #: bp-groups/bp-groups-template.php:5011
 msgid "Group photo"
-msgstr ""
+msgstr "Project photo"
 
 #: bp-core/classes/class-bp-admin.php:436
 msgid "Group Photo Uploads"
-msgstr ""
+msgstr "Project Photo Uploads"
 
 #: bp-templates/bp-legacy/buddypress/groups/single/home.php:39
 msgid "Group primary navigation"
-msgstr ""
+msgstr "Project primary navigation"
 
 #: bp-groups/classes/class-bp-groups-component.php:830
 #: bp-core/deprecated/2.1.php:373
@@ -4376,43 +4376,43 @@ msgstr ""
 #: bp-themes/bp-default/groups/index.php:21
 #: bp-themes/bp-default/groups/create.php:18
 msgid "Groups Directory"
-msgstr ""
+msgstr "Projects"
 
 #. accessibility text
 #: bp-templates/bp-legacy/buddypress/groups/index.php:115
 msgid "Groups directory"
-msgstr ""
+msgstr "Project directory"
 
 #: bp-templates/bp-legacy/buddypress/groups/index.php:59
 msgid "Groups directory main navigation"
-msgstr ""
+msgstr "Project directory main navigation"
 
 #: bp-templates/bp-legacy/buddypress/groups/index.php:79
 msgid "Groups directory secondary navigation"
-msgstr ""
+msgstr "Project directory secondary navigation"
 
 #. accessibility text
 #: bp-groups/classes/class-bp-groups-list-table.php:240
 msgid "Groups list"
-msgstr ""
+msgstr "Projects list"
 
 #. accessibility text
 #: bp-groups/bp-groups-admin.php:192
 msgid "Groups list navigation"
-msgstr ""
+msgstr "Projects list navigation"
 
 #: bp-groups/bp-groups-screens.php:844
 msgid "Groups must have a name and a description. Please try again."
-msgstr ""
+msgstr "Projects must have a name and a description. Please try again."
 
 #: bp-groups/bp-groups-admin.php:163
 msgctxt "Groups per page (screen options)"
 msgid "Groups"
-msgstr ""
+msgstr "Projects"
 
 #: bp-core/classes/class-bp-admin.php:429
 msgid "Groups Settings"
-msgstr ""
+msgstr "Projects Settings"
 
 #: bp-core/bp-core-customizer-email.php:284
 msgid "Header background color"
@@ -4467,7 +4467,7 @@ msgstr ""
 #: bp-themes/bp-default/groups/single/admin.php:355
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/delete-group.php:26
 msgid "I understand the consequences of deleting this group."
-msgstr ""
+msgstr "I understand the consequences of deleting this project."
 
 #: bp-themes/bp-default/members/single/settings/delete-account.php:72
 #: bp-templates/bp-legacy/buddypress/members/single/settings/delete-account.php:39
@@ -5498,19 +5498,19 @@ msgstr ""
 #. accessibility text
 #: bp-templates/bp-legacy/buddypress/members/single/groups.php:60
 msgid "My groups"
-msgstr ""
+msgstr "My projects"
 
 #: bp-templates/bp-legacy/buddypress/activity/index.php:94
 #: bp-templates/bp-legacy/buddypress/groups/index.php:64
 #, php-format
 msgid "My Groups %s"
-msgstr ""
+msgstr "My Projects %s"
 
 #: bp-themes/bp-default/activity/index.php:61
 #: bp-themes/bp-default/groups/index.php:39
 #, php-format
 msgid "My Groups <span>%s</span>"
-msgstr ""
+msgstr "My Projects <span>%s</span>"
 
 #: bp-groups/classes/class-bp-groups-component.php:811
 msgctxt "My Groups page <title>"
@@ -5977,7 +5977,7 @@ msgstr ""
 #: bp-themes/bp-default/groups/single/admin.php:26
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/edit-details.php:39
 msgid "Notify group members of these changes via email"
-msgstr ""
+msgstr "Notify project members of these changes via email"
 
 #: bp-core/bp-core-functions.php:2495
 #: bp-core/admin/bp-core-admin-components.php:76
@@ -6046,14 +6046,14 @@ msgstr ""
 #: bp-templates/bp-legacy/buddypress/groups/create.php:139
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:61
 msgid "Only users who are invited can join the group."
-msgstr ""
+msgstr "Only users who are invited can join the project."
 
 #: bp-themes/bp-default/groups/create.php:73
 #: bp-themes/bp-default/groups/single/admin.php:73
 #: bp-templates/bp-legacy/buddypress/groups/create.php:131
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:53
 msgid "Only users who request membership and are accepted can join the group."
-msgstr ""
+msgstr "Only users who request membership and are accepted can join the project."
 
 #: bp-forums/bp-forums-template.php:1734
 msgid "Open Topic"
@@ -8826,14 +8826,14 @@ msgstr "This project must have at least one admin"
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:46
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:54
 msgid "This group will be listed in the groups directory and in search results."
-msgstr "This project will be listed in the groups directory and in search results."
+msgstr "This project will be listed in the projects directory and in search results."
 
 #: bp-themes/bp-default/groups/create.php:83
 #: bp-themes/bp-default/groups/single/admin.php:84
 #: bp-templates/bp-legacy/buddypress/groups/create.php:140
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:62
 msgid "This group will not be listed in the groups directory or search results."
-msgstr ""
+msgstr "This project will not be listed in the projects directory or search results."
 
 #: bp-themes/bp-default/groups/create.php:80
 #: bp-themes/bp-default/groups/single/admin.php:81
@@ -9110,12 +9110,12 @@ msgstr ""
 #: bp-templates/bp-legacy/buddypress/groups/create.php:250
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-avatar.php:15
 msgid "Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results."
-msgstr ""
+msgstr "Upload an image to use as a profile photo for this project. The image will be shown on the main project page, and in search results."
 
 #: bp-themes/bp-default/groups/create.php:149
 #: bp-themes/bp-default/groups/single/admin.php:127
 msgid "Upload an image to use as an avatar for this group. The image will be shown on the main group page, and in search results."
-msgstr ""
+msgstr "Upload an image to use as an avatar for this project. The image will be shown on the main project page, and in search results."
 
 #: bp-core/bp-core-attachments.php:1296 bp-core/bp-core-avatars.php:903
 #, php-format
@@ -9527,7 +9527,7 @@ msgstr ""
 #: bp-themes/bp-default/groups/single/admin.php:352
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/delete-group.php:23
 msgid "WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option."
-msgstr ""
+msgstr "WARNING: Deleting this project will completely remove ALL content associated with it. There is no way back: please be careful with this option."
 
 #: bp-themes/bp-default/404.php:9
 msgid "We're sorry, but we can't find the page that you're looking for. Perhaps searching will help."

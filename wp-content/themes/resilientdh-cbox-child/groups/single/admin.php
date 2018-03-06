@@ -8,15 +8,15 @@
 
 <?php do_action( 'bp_before_group_admin_content' ); ?>
 
-<?php /* Edit Project Details */ ?>
+<?php /* Edit Group Details */ ?>
 <?php if ( bp_is_group_admin_screen( 'edit-details' ) ) : ?>
 
 	<?php do_action( 'bp_before_group_details_admin' ); ?>
 
-	<label for="group-name"><?php _e( 'Project Name (required)', 'buddypress' ); ?></label>
+	<label for="group-name"><?php _e( 'Group Name (required)', 'buddypress' ); ?></label>
 	<input type="text" name="group-name" id="group-name" value="<?php bp_group_name(); ?>" aria-required="true" />
 
-	<label for="group-desc"><?php _e( 'Project Description (required)', 'buddypress' ); ?></label>
+	<label for="group-desc"><?php _e( 'Group Description (required)', 'buddypress' ); ?></label>
 	<textarea name="group-desc" id="group-desc" aria-required="true"><?php bp_group_description_editable(); ?></textarea>
 
 	<?php do_action( 'groups_custom_group_fields_editable' ); ?>
@@ -34,7 +34,7 @@
 
 <?php endif; ?>
 
-<?php /* Manage Project Settings */ ?>
+<?php /* Manage Group Settings */ ?>
 <?php if ( bp_is_group_admin_screen( 'group-settings' ) ) : ?>
 
 	<?php do_action( 'bp_before_group_settings_admin' ); ?>
@@ -60,9 +60,9 @@
 			<input type="radio" name="group-status" value="public"<?php bp_group_show_status_setting( 'public' ); ?> />
 			<strong><?php _e( 'This is a public group', 'buddypress' ); ?></strong>
 			<ul>
-				<li><?php _e( 'Any site member can join this project.', 'buddypress' ); ?></li>
-				<li><?php _e( 'This project will be listed in the projects directory and in search results.', 'buddypress' ); ?></li>
-				<li><?php _e( 'Project content and activity will be visible to any site member.', 'buddypress' ); ?></li>
+				<li><?php _e( 'Any site member can join this group.', 'buddypress' ); ?></li>
+				<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
+				<li><?php _e( 'Group content and activity will be visible to any site member.', 'buddypress' ); ?></li>
 			</ul>
 		</label>
 
@@ -70,9 +70,9 @@
 			<input type="radio" name="group-status" value="private"<?php bp_group_show_status_setting( 'private' ); ?> />
 			<strong><?php _e( 'This is a private group', 'buddypress' ); ?></strong>
 			<ul>
-				<li><?php _e( 'Only users who request membership and are accepted can join the project.', 'buddypress' ); ?></li>
-				<li><?php _e( 'This project will be listed in the projects directory and in search results.', 'buddypress' ); ?></li>
-				<li><?php _e( 'Project content and activity will only be visible to members of the project.', 'buddypress' ); ?></li>
+				<li><?php _e( 'Only users who request membership and are accepted can join the group.', 'buddypress' ); ?></li>
+				<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'buddypress' ); ?></li>
+				<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
 			</ul>
 		</label>
 
@@ -80,33 +80,33 @@
 			<input type="radio" name="group-status" value="hidden"<?php bp_group_show_status_setting( 'hidden' ); ?> />
 			<strong><?php _e( 'This is a hidden group', 'buddypress' ); ?></strong>
 			<ul>
-				<li><?php _e( 'Only users who are invited can join the project.', 'buddypress' ); ?></li>
-				<li><?php _e( 'This project will not be listed in the projects directory or search results.', 'buddypress' ); ?></li>
-				<li><?php _e( 'Project content and activity will only be visible to members of the project.', 'buddypress' ); ?></li>
+				<li><?php _e( 'Only users who are invited can join the group.', 'buddypress' ); ?></li>
+				<li><?php _e( 'This group will not be listed in the groups directory or search results.', 'buddypress' ); ?></li>
+				<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'buddypress' ); ?></li>
 			</ul>
 		</label>
 	</div>
 
 	<hr /> 
 	 
-	<h4><?php _e( 'Project Invitations', 'buddypress' ); ?></h4> 
+	<h4><?php _e( 'Group Invitations', 'buddypress' ); ?></h4> 
 
-	<p><?php _e( 'Which members of this project are allowed to invite others?', 'buddypress' ); ?></p> 
+	<p><?php _e( 'Which members of this group are allowed to invite others?', 'buddypress' ); ?></p> 
 
 	<div class="radio"> 
 		<label> 
 			<input type="radio" name="group-invite-status" value="members"<?php bp_group_show_invite_status_setting( 'members' ); ?> /> 
-			<strong><?php _e( 'All project members', 'buddypress' ); ?></strong> 
+			<strong><?php _e( 'All group members', 'buddypress' ); ?></strong> 
 		</label> 
 
 		<label> 
 			<input type="radio" name="group-invite-status" value="mods"<?php bp_group_show_invite_status_setting( 'mods' ); ?> /> 
-			<strong><?php _e( 'Project admins and mods only', 'buddypress' ); ?></strong> 
+			<strong><?php _e( 'Group admins and mods only', 'buddypress' ); ?></strong> 
 		</label>
 		
 		<label> 
 			<input type="radio" name="group-invite-status" value="admins"<?php bp_group_show_invite_status_setting( 'admins' ); ?> /> 
-			<strong><?php _e( 'Project admins only', 'buddypress' ); ?></strong> 
+			<strong><?php _e( 'Group admins only', 'buddypress' ); ?></strong> 
 		</label> 
  	</div> 
 
@@ -119,12 +119,12 @@
 
 <?php endif; ?>
 
-<?php /* Project Avatar Settings */ ?>
+<?php /* Group Avatar Settings */ ?>
 <?php if ( bp_is_group_admin_screen( 'group-avatar' ) ) : ?>
 
 	<?php if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
 
-			<p><?php _e("Upload an image to use as an avatar for this project. The image will be shown on the main project page, and in search results.", 'buddypress'); ?></p>
+			<p><?php _e("Upload an image to use as an avatar for this group. The image will be shown on the main group page, and in search results.", 'buddypress'); ?></p>
 
 			<p>
 				<input type="file" name="file" id="file" />
@@ -168,7 +168,7 @@
 
 <?php endif; ?>
 
-<?php /* Manage Project Members */ ?>
+<?php /* Manage Group Members */ ?>
 <?php if ( bp_is_group_admin_screen( 'manage-members' ) ) : ?>
 
 	<?php do_action( 'bp_before_group_manage_members_admin' ); ?>
@@ -287,7 +287,7 @@
 		<?php else: ?>
 
 			<div id="message" class="info">
-				<p><?php _e( 'This project has no members.', 'buddypress' ); ?></p>
+				<p><?php _e( 'This group has no members.', 'buddypress' ); ?></p>
 			</div>
 
 		<?php endif; ?>
@@ -357,18 +357,18 @@
 
 <?php endif; ?>
 
-<?php do_action( 'groups_custom_edit_steps' ) // Allow plugins to add custom project edit screens ?>
+<?php do_action( 'groups_custom_edit_steps' ) // Allow plugins to add custom group edit screens ?>
 
-<?php /* Delete Project Option */ ?>
+<?php /* Delete Group Option */ ?>
 <?php if ( bp_is_group_admin_screen( 'delete-group' ) ) : ?>
 
 	<?php do_action( 'bp_before_group_delete_admin' ); ?>
 
 	<div id="message" class="info">
-		<p><?php _e( 'WARNING: Deleting this project will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'buddypress' ); ?></p>
+		<p><?php _e( 'WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'buddypress' ); ?></p>
 	</div>
 
-	<label><input type="checkbox" name="delete-group-understand" id="delete-group-understand" value="1" onclick="if(this.checked) { document.getElementById('delete-group-button').disabled = ''; } else { document.getElementById('delete-group-button').disabled = 'disabled'; }" /> <?php _e( 'I understand the consequences of deleting this project.', 'buddypress' ); ?></label>
+	<label><input type="checkbox" name="delete-group-understand" id="delete-group-understand" value="1" onclick="if(this.checked) { document.getElementById('delete-group-button').disabled = ''; } else { document.getElementById('delete-group-button').disabled = 'disabled'; }" /> <?php _e( 'I understand the consequences of deleting this group.', 'buddypress' ); ?></label>
 
 	<?php do_action( 'bp_after_group_delete_admin' ); ?>
 

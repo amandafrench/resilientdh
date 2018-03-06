@@ -24,7 +24,7 @@
 				 * @todo A real template hierarchy? Gasp!
 				 */
 
-				// Project is visible
+				// Group is visible
 				if ( bp_group_is_visible() ) : 
 
 					// Looking at home location
@@ -45,19 +45,19 @@
 					// Not looking at home
 					else :
 
-						// Project Admin
+						// Group Admin
 						if     ( bp_is_group_admin_page() ) : locate_template( array( 'groups/single/admin.php'        ), true );
 
-						// Project Activity
+						// Group Activity
 						elseif ( bp_is_group_activity()   ) : locate_template( array( 'groups/single/activity.php'     ), true );
 
-						// Project Members
+						// Group Members
 						elseif ( bp_is_group_members()    ) : locate_template( array( 'groups/single/members.php'      ), true );
 
-						// Project Invitations
+						// Group Invitations
 						elseif ( bp_is_group_invites()    ) : locate_template( array( 'groups/single/send-invites.php' ), true );
 
-						// Old project forums
+						// Old group forums
 						elseif ( bp_is_group_forum()      ) : locate_template( array( 'groups/single/forum.php'        ), true );
 
 						// Membership request
@@ -69,14 +69,14 @@
 						endif;
 					endif;
 
-				// Project is not visible
+				// Group is not visible
 				elseif ( ! bp_group_is_visible() ) :
 
 					// Membership request
 					if ( bp_is_group_membership_request() ) :
 						locate_template( array( 'groups/single/request-membership.php' ), true );
 
-					// The project is not visible, show the status message
+					// The group is not visible, show the status message
 					else :
 
 						do_action( 'bp_before_group_status_message' ); ?>

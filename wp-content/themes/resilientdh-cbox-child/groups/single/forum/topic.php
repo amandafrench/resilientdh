@@ -131,7 +131,7 @@
 					<p id="post-reply"></p>
 
 					<?php if ( bp_groups_auto_join() && !bp_group_is_member() ) : ?>
-						<p><?php _e( 'You will auto join this project when you reply to this topic.', 'buddypress' ); ?></p>
+						<p><?php _e( 'You will auto join this group when you reply to this topic.', 'buddypress' ); ?></p>
 					<?php endif; ?>
 
 					<?php do_action( 'groups_forum_new_reply_before' ); ?>

@@ -70,7 +70,7 @@
 <?php else : ?>
 
 	<div id="message" class="info" role="main">
-		<p><?php _e( 'Once you have built up friend connections you will be able to invite others to your project.', 'buddypress' ); ?></p>
+		<p><?php _e( 'Once you have built up friend connections you will be able to invite others to your group.', 'buddypress' ); ?></p>
 	</div>
 
 <?php endif; ?>

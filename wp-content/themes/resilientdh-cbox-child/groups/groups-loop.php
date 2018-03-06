@@ -1,7 +1,7 @@
 <?php
 
 /**
- * BuddyPress - Projects Loop
+ * BuddyPress - Groups Loop
  *
  * Querystring is set via AJAX in _inc/ajax.php - bp_dtheme_object_filter()
  *
@@ -92,7 +92,7 @@
 <?php else: ?>
 
 	<div id="message" class="info">
-		<p><?php _e( 'There were no projects found.', 'buddypress' ); ?></p>
+		<p><?php _e( 'There were no groups found.', 'buddypress' ); ?></p>
 	</div>
 
 <?php endif; ?>
