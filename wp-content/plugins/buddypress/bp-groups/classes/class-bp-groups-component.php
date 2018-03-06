@@ -186,7 +186,7 @@ class BP_Groups_Component extends BP_Component {
 			'has_directory'         => true,
 			'directory_title'       => isset( $bp->pages->groups->title ) ? $bp->pages->groups->title : $default_directory_title,
 			'notification_callback' => 'groups_format_notifications',
-			'search_string'         => _x( 'Search Projects...', 'Component directory search', 'buddypress' ),
+			'search_string'         => _x( 'Search Groups...', 'Component directory search', 'buddypress' ),
 			'global_tables'         => $global_tables,
 			'meta_tables'           => $meta_tables,
 		);
@@ -452,14 +452,13 @@ class BP_Groups_Component extends BP_Component {
 			$user_domain = false;
 		}
 
-		// Only grab count if we're on a user page. 
-		// Here is where I have replaced Groups with Projects, hack hack hack, must learn to do this in functions -- AF
+		// Only grab count if we're on a user page.
 		if ( bp_is_user() ) {
 			$class = ( 0 === groups_total_groups_for_user( bp_displayed_user_id() ) ) ? 'no-count' : 'count';
 
 			$nav_name = sprintf(
 				/* translators: %s: Group count for the current user */
-				_x( 'Projects %s', 'Group screen nav with counter', 'buddypress' ),
+				_x( 'Groups %s', 'Group screen nav with counter', 'buddypress' ),
 				sprintf(
 					'<span class="%s">%s</span>',
 					esc_attr( $class ),
@@ -467,7 +466,7 @@ class BP_Groups_Component extends BP_Component {
 				)
 			);
 		} else {
-			$nav_name = _x( 'Projects', 'Group screen nav without counter', 'buddypress' );
+			$nav_name = _x( 'Groups', 'Group screen nav without counter', 'buddypress' );
 		}
 
 		$slug = bp_get_groups_slug();

@@ -683,11 +683,11 @@ function bp_get_group_type( $group = false ) {
 	}
 
 	if ( 'public' == $group->status ) {
-		$type = __( "Public Project", 'buddypress' );
+		$type = __( "Public Group", 'buddypress' );
 	} elseif ( 'hidden' == $group->status ) {
-		$type = __( "Hidden Project", 'buddypress' );
+		$type = __( "Hidden Group", 'buddypress' );
 	} elseif ( 'private' == $group->status ) {
-		$type = __( "Private Project", 'buddypress' );
+		$type = __( "Private Group", 'buddypress' );
 	} else {
 		$type = ucwords( $group->status ) . ' ' . __( 'Group', 'buddypress' );
 	}
@@ -1911,11 +1911,11 @@ function bp_groups_pagination_count() {
 		$from_num  = bp_core_number_format( $start_num );
 		$to_num    = bp_core_number_format( ( $start_num + ( $groups_template->pag_num - 1 ) > $groups_template->total_group_count ) ? $groups_template->total_group_count : $start_num + ( $groups_template->pag_num - 1 ) );
 		$total     = bp_core_number_format( $groups_template->total_group_count );
-// Here I have replaced Viewing 1 group with Viewing 1 project
+
 		if ( 1 == $groups_template->total_group_count ) {
-			$message = __( 'Viewing 1 project', 'buddypress' );
+			$message = __( 'Viewing 1 group', 'buddypress' );
 		} else {
-			$message = sprintf( _n( 'Viewing %1$s - %2$s of %3$s project', 'Viewing %1$s - %2$s of %3$s projects', $groups_template->total_group_count, 'buddypress' ), $from_num, $to_num, $total );
+			$message = sprintf( _n( 'Viewing %1$s - %2$s of %3$s group', 'Viewing %1$s - %2$s of %3$s groups', $groups_template->total_group_count, 'buddypress' ), $from_num, $to_num, $total );
 		}
 
 		/**
@@ -3485,7 +3485,7 @@ function bp_group_join_button( $group = false ) {
 			if ( ( 1 == count( $group_admins ) ) && ( bp_loggedin_user_id() === (int) $group_admins[0]->user_id ) ) {
 				return false;
 			}
-// I AM CHANGING Groups to Projects again --AF
+
 			// Setup button attributes.
 			$button = array(
 				'id'                => 'leave_group',
@@ -3495,7 +3495,7 @@ function bp_group_join_button( $group = false ) {
 				'wrapper_class'     => 'group-button ' . $group->status,
 				'wrapper_id'        => 'groupbutton-' . $group->id,
 				'link_href'         => wp_nonce_url( trailingslashit( bp_get_group_permalink( $group ) . 'leave-group' ), 'groups_leave_group' ),
-				'link_text'         => __( 'Leave Project', 'buddypress' ),
+				'link_text'         => __( 'Leave Group', 'buddypress' ),
 				'link_class'        => 'group-button leave-group',
 			);
 
@@ -3516,7 +3516,7 @@ function bp_group_join_button( $group = false ) {
 						'wrapper_class'     => 'group-button ' . $group->status,
 						'wrapper_id'        => 'groupbutton-' . $group->id,
 						'link_href'         => wp_nonce_url( trailingslashit( bp_get_group_permalink( $group ) . 'join' ), 'groups_join_group' ),
-						'link_text'         => __( 'Join Project', 'buddypress' ),
+						'link_text'         => __( 'Join Group', 'buddypress' ),
 						'link_class'        => 'group-button join-group',
 					);
 					break;
