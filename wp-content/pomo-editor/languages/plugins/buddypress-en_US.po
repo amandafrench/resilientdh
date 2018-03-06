@@ -9429,7 +9429,7 @@ msgstr ""
 
 #: bp-groups/bp-groups-template.php:1916
 msgid "Viewing 1 group"
-msgstr ""
+msgstr "Viewing 1 project"
 
 #: bp-groups/bp-groups-template.php:6055
 msgid "Viewing 1 invitation"
