@@ -165,11 +165,19 @@ function ass_digest_fire( $type ) {
 
 		$userdomain = ass_digest_get_user_domain( $user_id );
 
+		// Keep an unfiltered copy of the activity IDs to be compared with sent items.
+		$group_activity_ids_unfiltered = $group_activity_ids;
+
 		// filter the list - can be used to sort the groups
 		$group_activity_ids = apply_filters( 'ass_digest_group_activity_ids', @$group_activity_ids );
 
+		// Keep an unmodified copy of the activity IDs to be passed to filters.
+		$group_activity_ids_pristine = $group_activity_ids;
+
 		$header = "<div class=\"digest-header\" {$ass_email_css['title']}>$title " . __('at', 'bp-ass')." <a href='" . $bp->root_domain . "'>$blogname</a></div>\n\n";
 		$message = apply_filters( 'ass_digest_header', $header, $title, $ass_email_css['title'] );
+
+		$sent_activity_ids = array();
 
 		// loop through each group for this user
 		$has_group_activity = false;
@@ -178,6 +186,15 @@ function ass_digest_fire( $type ) {
 			// intersect against our master activity IDs array
 			$activity_ids = array_intersect_key( array_flip( $activity_ids ), $bp->ass->activity_ids );
 			$activity_ids = array_keys( $activity_ids );
+
+			// Discard activity items that are invalid.
+			$activity_ids_raw = $activity_ids;
+			$activity_ids = array();
+			foreach ( $activity_ids_raw as $activity_id_raw ) {
+				if ( bp_ges_activity_is_valid_for_digest( $activity_id_raw, $type, $user->user_id ) ) {
+					$activity_ids[] = $activity_id_raw;
+				}
+			}
 
 			// Activities could have been deleted since being recorded for digest emails.
 			if ( empty( $activity_ids ) ) {
@@ -196,7 +213,8 @@ function ass_digest_fire( $type ) {
 			}
 
 			$activity_message .= ass_digest_format_item_group( $group_id, $activity_ids, $type, $group_name, $group_slug, $user_id );
-			unset( $group_activity_ids[ $group_id ] );
+
+			$sent_activity_ids[ $group_id ] = $activity_ids;
 		}
 
 		// If there's nothing to send, skip this use.
@@ -204,9 +222,20 @@ function ass_digest_fire( $type ) {
 			continue;
 		}
 
-
 		// reset the user's sub array removing those sent
-		$group_activity_ids_array[$type] = $group_activity_ids;
+		$unsent_groups = array();
+		foreach ( $group_activity_ids_unfiltered as $queued_group_id => $queued_activity_ids ) {
+			if ( isset( $sent_activity_ids[ $queued_group_id ] ) ) {
+				$unsent_ids = array_diff( $queued_activity_ids, $sent_activity_ids[ $queued_group_id ] );
+				if ( $unsent_ids ) {
+					$unsent_groups[ $queued_group_id ] = $unsent_ids;
+				}
+			} else {
+				// No items from this group were sent, so all get requeued.
+				$unsent_groups[ $queued_group_id ] = $queued_activity_ids;
+			}
+		}
+		$group_activity_ids_array[$type] = $unsent_groups;
 
 		// show group summary for digest, and follow help text for weekly summary
 		if ( 'dig' == $type ) {
@@ -235,6 +264,22 @@ function ass_digest_fire( $type ) {
 		$message .= apply_filters( 'ass_digest_disable_notifications', $unsubscribe_message, $userdomain . $bp->groups->slug );
 
 		$message .= "</div>";
+
+		/**
+		 * Filter to allow plugins to stop the email from being sent.
+		 *
+		 * @since 3.8.0
+		 *
+		 * @param bool   true                Whether or not to send the email.
+		 * @param int    $user_id            ID of the user whose digest is currently being processed.
+		 * @param array  $group_activity_ids Array of activity items in the digest.
+		 * @param string $message            Message body.
+		 * @param string $type               Digest type. 'dig' or 'sum'.
+		 */
+		$send = apply_filters( 'bp_ges_send_digest_to_user', true, $user_id, $group_activity_ids, $message, $type );
+		if ( ! $send ) {
+			continue;
+		}
 
 		if ( isset( $_GET['sum'] ) ) {
 			// test mode run from the browser, dont send the emails, just show them on screen using domain.com?sum=1
@@ -267,6 +312,17 @@ function ass_digest_fire( $type ) {
 				// BP-specific tokens.
 				$user_message_args['usermessage'] = $body;
 				$user_message_args['poster.name'] = $userdata['user_login']; // Unused
+
+				/**
+				 * Filters the arguments passed to `ass_send_email()` when a digest is sent.
+				 *
+				 * @since 3.7.3
+				 *
+				 * @param array $user_message_args           Arguments passed to ass_send_email 'tokens' param.
+				 * @param int   $user_id                     ID of the user whose digest is currently being processed.
+				 * @param array $group_activity_ids_pristine Array of activity items in the digest.
+				 */
+				$user_message_args = apply_filters( 'bp_ges_user_digest_message_args', $user_message_args, $user_id, $group_activity_ids_pristine );
 
 				// Filters.
 				add_filter( 'bp_email_get_salutation', 'ass_digest_filter_salutation' );
@@ -446,7 +502,18 @@ function ass_digest_format_item_group( $group_id, $activity_ids, $type, $group_n
 		//$group_message .= '<pre>'. $item->id .'</pre>';
 	}
 
-	return apply_filters( 'ass_digest_format_item_group', $group_message, $group_id, $type );
+	/**
+	 * Filters the markup for a group's digest section.
+	 *
+	 * @since 3.8.0 Introduced $activity_ids and $user_id parameters.
+	 *
+	 * @param string $group_message Markup.
+	 * @param int    $group_id      ID of the group.
+	 * @param string $type          Digest type. 'dig' or 'sum'.
+	 * @param array  $activity_ids  Array of IDs included in this group's digest.
+	 * @param int    $user_id       ID of the user receiving the digest.
+	 */
+	return apply_filters( 'ass_digest_format_item_group', $group_message, $group_id, $type, $activity_ids, $user_id );
 }
 
 
@@ -605,17 +672,19 @@ function ass_send_multipart_email( $to, $subject, $message_plaintext, $message )
 	// we're doing this during the 'wp_mail_from' filter because this runs before
 	// 'phpmailer_init'
 	$admin_email = addslashes( $admin_email );
-	$admin_email_filter = create_function( '$admin_email', '
+	$admin_email_filter = function( $admin_email ) {
 		global $phpmailer;
 
 		$phpmailer->Body    = "";
 		$phpmailer->AltBody = "";
 
 		return $admin_email;
-	' );
+	};
 
 	$from_name = addslashes( $from_name );
-	$from_name_filter = create_function( '$from_name', 'return $from_name;' );
+	$from_name_filter = function( $from_name ) {
+		return $from_name;
+	};
 
 	// set the WP email overrides
 	add_filter( 'wp_mail_from',      $admin_email_filter );
@@ -623,9 +692,9 @@ function ass_send_multipart_email( $to, $subject, $message_plaintext, $message )
 
 	// setup plain-text body
 	$message_plaintext = addslashes( $message_plaintext );
-	add_action( 'phpmailer_init', create_function( '$phpmailer', '
-		$phpmailer->AltBody = "' . $message_plaintext . '";
-	' ) );
+	add_action( 'phpmailer_init', function( $phpmailer ) use ( $message_plaintext ) {
+		$phpmailer->AltBody = "'" . $message_plaintext . "'";
+	} );
 
 	// set content type as HTML
 	$headers = array( 'Content-type: text/html' );
@@ -855,3 +924,55 @@ function ass_digest_support_wp_better_emails( $message, $message_pre_html_wrap )
     return $message;
 }
 add_filter( 'ass_digest_message_html', 'ass_digest_support_wp_better_emails', 10, 2 );
+
+/**
+ * Checks whether an item is valid to send in a digest for a user.
+ *
+ * @since 3.8.0
+ *
+ * @param
+ */
+function bp_ges_activity_is_valid_for_digest( $activity_id, $digest_type, $user_id = null ) {
+	/*
+	 * By default, an activity item is "stale" if it should have sent more than
+	 * three digest-periods ago.
+	 */
+	$is_stale = false;
+	$default_stale_activity_period = 'dig' === $digest_type ? ( 3 * DAY_IN_SECONDS ) : ( 3 * WEEK_IN_SECONDS );
+
+	/**
+	 * Filters the "staleness" period for an activity item, after which it is discarded and not included in digests.
+	 *
+	 * @since 3.8.0
+	 *
+	 * @param int    $stale_activity_period Time period, in seconds.
+	 * @param int    $activity_id           Activity ID.
+	 * @param string $digest_type           Digest type. 'dig' or 'sum'.
+	 * @param int    $user_id               User ID.
+	 */
+	$stale_activity_period = apply_filters( 'bp_ges_stale_activity_period', $default_stale_activity_period, $activity_id, $digest_type, $user_id );
+
+	if ( isset( buddypress()->ass->items[ $activity_id ] ) ) {
+		$activity_item = buddypress()->ass->items[ $activity_id ];
+	} else {
+		$activity_item = new BP_Activity_Activity( $activity_id );
+	}
+
+	if ( ( time() - strtotime( $activity_item->date_recorded ) ) > $stale_activity_period ) {
+		$is_stale = true;
+	}
+
+	$is_valid = ! $is_stale;
+
+	/**
+	 * Filters whether an activity item should be considered valid for a digest.
+	 *
+	 * @since 3.8.0
+	 *
+	 * @param bool   $is_valid    Whether the activity item is valid.
+	 * @param int    $activity_id Activity ID.
+	 * @param string $digest_type Digest type. 'dig' or 'sum'.
+	 * @param int    $user_id     User ID.
+	 */
+	return apply_filters( 'bp_ges_activity_is_valid_for_digest', $is_valid, $activity_id, $digest_type, $user_id );
+}

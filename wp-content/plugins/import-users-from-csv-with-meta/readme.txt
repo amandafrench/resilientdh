@@ -4,7 +4,7 @@ Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
 Tested up to: 4.9.4
-Stable tag: 1.10.11.1
+Stable tag: 1.10.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,12 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.10.13 =
+*	You can now import User Groups (https://wordpress.org/plugins/user-groups/) and assign them to the users
+
+= 1.10.12 =
+*	You can now import WP User Groups (https://es.wordpress.org/plugins/wp-user-groups/) and assign them to the users thanks to the support of Arturas & Luis, Lda.
 
 = 1.10.11.1 =
 *	Debug notice shown fixed (thanks for submiting the bug @anieves (https://wordpress.org/support/topic/problem-using-wp-members-with-import-users-from-csv-2/#post-10035037)

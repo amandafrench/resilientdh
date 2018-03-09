@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.10.11.1
+Version:		1.10.13
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
@@ -39,6 +39,7 @@ function acui_loader(){
 	register_deactivation_hook( __FILE__, 'acui_deactivate' );
 	add_action( "plugins_loaded", "acui_init" );
 	add_action( "admin_menu", "acui_menu" );
+	add_action( 'admin_enqueue_scripts', 'acui_admin_enqueue_scripts' );
 	add_filter( 'plugin_row_meta', 'acui_plugin_row_meta', 10, 2 );
 	add_action( 'admin_init', 'acui_modify_user_edit_admin' );
 	add_action( 'wp_ajax_acui_delete_attachment', 'acui_delete_attachment' );
@@ -101,6 +102,10 @@ function acui_deactivate(){
 	wp_clear_scheduled_hook( 'acui_cron' );
 }
 
+function acui_admin_enqueue_scripts() {
+	wp_enqueue_style( 'acui_css', plugin_dir_url( __FILE__ ) . '/assets/style.css', false, '1.0.0' );
+}
+
 function acui_delete_options(){
 	global $acui_smtp_options;
 
@@ -143,7 +148,7 @@ function acui_menu() {
 function acui_plugin_row_meta( $links, $file ){
 	if ( strpos( $file, basename( __FILE__ ) ) !== false ) {
 		$new_links = array(
-					'<a href="https://www.paypal.me/codection" target="_blank">' . __( 'Donate', 'import-users-from-csv-with-meta' ) . '</a>',
+					'<a href="https://www.paypal.me/imalrod" target="_blank">' . __( 'Donate', 'import-users-from-csv-with-meta' ) . '</a>',
 					'<a href="mailto:contacto@codection.com" target="_blank">' . __( 'Premium support', 'import-users-from-csv-with-meta' ) . '</a>',
 					'<a href="http://codection.com/tienda" target="_blank">' . __( 'Premium plugins', 'import-users-from-csv-with-meta' ) . '</a>',
 				);

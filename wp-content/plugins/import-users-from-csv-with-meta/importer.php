@@ -617,7 +617,7 @@ function acui_options(){
 
 	acui_check_options();
 ?>
-	<div class="wrap">	
+	<div class="wrap acui">	
 
 		<?php if( $old_csv_files->found_posts > 0 ): ?>
 		<div class="postbox">
@@ -651,13 +651,13 @@ function acui_options(){
 		<div id='message' class='updated'><?php _e( 'File must contain at least <strong>2 columns: username and email</strong>. These should be the first two columns and it should be placed <strong>in this order: username and email</strong>. If there are more columns, this plugin will manage it automatically.', 'import-users-from-csv-with-meta' ); ?></div>
 		<div id='message-password' class='error'><?php _e( 'Please, read carefully how <strong>passwords are managed</strong> and also take note about capitalization, this plugin is <strong>case sensitive</strong>.', 'import-users-from-csv-with-meta' ); ?></div>
 
-		<div style="float:left; width:80%;">
+		<div>
 			<h2><?php _e( 'Import users from CSV','import-users-from-csv-with-meta' ); ?></h2>
 		</div>
 
 		<div style="clear:both;"></div>
 
-		<div style="width:100%;">
+		<div class="main_bar">
 			<form method="POST" enctype="multipart/form-data" action="" accept-charset="utf-8" onsubmit="return check();">
 			<table class="form-table">
 				<tbody>
@@ -851,6 +851,28 @@ function acui_options(){
 			</form>
 		</div>
 
+		<div class="sidebar">
+			<div class="sidebar_section" id="vote_us">
+				<h3>Rate Us</h3>
+				<ul>
+					<li><label>If you like it, Please vote and support us.</label></li>
+				</ul>
+			</div>
+			<div class="sidebar_section">
+				<h3>Having Issues?</h3>
+				<ul>
+					<li><label>You can create a ticket</label> <a target="_blank" href="http://wordpress.org/support/plugin/import-users-from-csv-with-meta"><label>WordPress support forum</label></a></li>
+					<li><label>You can ask for premium support</label> <a target="_blank" href="mailto:contacto@codection.com"><label>contacto@codection.com</label></a></li>
+				</ul>
+			</div>
+			<div class="sidebar_section">
+				<h3>Donate</h3>
+				<ul>
+					<li><label>If you appreciate our work and you want to help us to continue developing it and giving the best support</label> <a target="_blank" href="https://paypal.me/imalrod"><label>donate</label></a></li>
+				</ul>
+			</div>
+		</div>
+
 	</div>
 	<script type="text/javascript">
 	function check(){
@@ -913,6 +935,11 @@ function acui_options(){
 
 			$("#upload_file,#introduce_path").toggle();
 		} );
+
+		$("#vote_us").click(function(){
+			var win=window.open("http://wordpress.org/support/view/plugin-reviews/import-users-from-csv-with-meta?free-counter?rate=5#postform", '_blank');
+			win.focus();
+		});
 
 	} );
 	</script>
@@ -1393,7 +1420,7 @@ function acui_options(){
 	    <div class="inside" style="display: block;">
 	        <img src="<?php echo $url_plugin; ?>icon_coffee.png" alt="<?php _e( 'buy me a coffee', 'import-users-from-csv-with-meta' ); ?>" style=" margin: 5px; float:left;">
 	        <p><?php _e( 'Hi! we are', 'import-users-from-csv-with-meta'); ?> <a href="https://twitter.com/fjcarazo" target="_blank" title="Javier Carazo">Javier Carazo</a> <?php _e( 'and', 'import-users-from-csv-with-meta' ); ?> <a href="https://twitter.com/ahornero" target="_blank" title="Alberto Hornero">Alberto Hornero</a> <?php _e( 'from', 'import-users-from-csv-with-meta' ); ?> <a href="http://codection.com">Codection</a>, <?php _e("developers of this plugin.", 'import-users-from-csv-with-meta' ); ?></p>
-	        <p><?php _e( 'We have been spending many hours to develop this plugin. <br>If you like and use this plugin, you can <strong>buy us a cup of coffee</strong>.', 'import-users-from-csv-with-meta' ); ?></p>
+	        <p><?php _e( 'We have been spending many hours to develop this plugin and answering questions in the forum to give you the best support. <br>If you like and use this plugin, you can <strong>buy us a cup of coffee</strong>.', 'import-users-from-csv-with-meta' ); ?></p>
 	        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 				<input type="hidden" name="cmd" value="_s-xclick">
 				<input type="hidden" name="hosted_button_id" value="QPYVWKJG4HDGG">
