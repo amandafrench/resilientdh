@@ -4,7 +4,7 @@ Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
 Tested up to: 4.9.4
-Stable tag: 1.10.13
+Stable tag: 1.11.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,7 @@ In Codection we have more plugins, please take a look to them.
 *	[Ceca Gateway for WooCommerce Pro a plugin to connect your WooCommerce to Ceca](http://codection.com/producto/ceca-gateway-for-woocommerce-pro/) (premium)
 *	[BBVA Bancomer for WooCommerce Pro a plugin to connect your WooCommerce to BBVA Bancomer](http://codection.com/producto/bbva-bancomer-mexico-gateway-for-woocommerce-pro/) (premium)
 *	[RedSys Button for WordPress a plugin to receive payments using RedSys in WordPress without using WooCommerce](http://codection.com/producto/redsys-button-wordpress/) (premium)
+*	[RedSys Gateway for WP Booking Calendar Pro a plugin to receive payments using RedSys in WordPress using WP Booking Calendar Pro](https://codection.com/producto/redsys-gateway-for-wp-booking-calendar-pro/) (premium)
 *	[Clean Login a plugin to create your own register, log in, lost password and update profile forms](https://wordpress.org/plugins/clean-login/) (free)
 
 ## **Basics**
@@ -69,6 +70,16 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.11.2 =
+*	Problem with WordPress default emails fixed
+
+= 1.11.1 =
+*	Sidebar changed
+*	Readme completed
+
+= 1.11 =
+*	You can now import users from the frontend using a shortcode thanks to Nelson Artz Group GmbH & Co. KG
 
 = 1.10.13 =
 *	You can now import User Groups (https://wordpress.org/plugins/user-groups/) and assign them to the users

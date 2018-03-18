@@ -35,6 +35,11 @@
     margin: 0 0 10px;
 }
 
+.acui .sidebar img {
+    display: block;
+    margin: 0 auto;
+}
+
 .acui .sidebar_section label {
     font-size: 11px;
 }

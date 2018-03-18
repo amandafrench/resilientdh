@@ -2,7 +2,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; 
 
-function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false ){?>
+function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false, $is_frontend = false ){?>
 	<div class="wrap">
 		<h2>Importing users</h2>	
 		<?php
@@ -69,7 +69,13 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false 
   				update_option( "acui_manually_send_mail_updated", true );
   			else
 				update_option( "acui_manually_send_mail_updated", false );
-	
+
+			// disable WordPress default emails if this must be disabled
+			if( !get_option('acui_automattic_wordpress_email') ){
+				add_filter( 'send_email_change_email', 'acui_return_false', 999 );
+				add_filter( 'send_password_change_email', 'acui_return_false', 999 );
+			}
+
 			// action
 			echo "<h3>" . __('Ready to registers','import-users-from-csv-with-meta') . "</h3>";
 			echo "<p>" . __('First row represents the form of sheet','import-users-from-csv-with-meta') . "</p>";
@@ -455,6 +461,13 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false 
 							}							
 						}
 					}
+					elseif( $is_frontend ){
+						if( get_option( "acui_frontend_send_mail" ) ){
+							if( $created || ( !$created && get_option( "acui_frontend_send_mail_updated" ) ) ){
+								$mail_for_this_user = true;
+							}							
+						}
+					}
 					else{
 						if( isset( $form_data["sends_email"] ) && $form_data["sends_email"] ){
 							if( $created || ( !$created && ( isset( $form_data["send_email_updated"] ) && $form_data["send_email_updated"] ) ) )
@@ -493,11 +506,6 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false 
 							$body_mail = str_replace("**" . $headers[ $i ] .  "**", $data[ $i ] , $body_mail);							
 						}
 
-						if( !get_option('acui_automattic_wordpress_email') ){
-							add_filter( 'send_email_change_email', 'acui_return_false', 999 );
-							add_filter( 'send_password_change_email', 'acui_return_false', 999 );
-						}
-						
 						$body_mail = wpautop( $body_mail );
 
 						add_filter( 'wp_mail_content_type', 'cod_set_html_content_type' );
@@ -516,19 +524,20 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false 
 						else
 							wp_mail( $email, $subject, $body_mail );
 
-						remove_filter( 'wp_mail_content_type', 'cod_set_html_content_type' );
-
-						if( !get_option('acui_automattic_wordpress_email') ){
-							remove_filter( 'send_email_change_email', 'acui_return_false', 999 );
-							remove_filter( 'send_password_change_email', 'acui_return_false', 999 );
-						}
-
+						remove_filter( 'wp_mail_content_type', 'cod_set_html_content_type' );						
 					endif;
 
 				endif;
 
 				$row++;						
 			endwhile;
+
+			// let the filter of default WordPress emails as it were before deactivating them
+			if( !get_option('acui_automattic_wordpress_email') ){
+				remove_filter( 'send_email_change_email', 'acui_return_false', 999 );
+				remove_filter( 'send_password_change_email', 'acui_return_false', 999 );
+			}
+
 
 			if( $attach_id != 0 )
 				wp_delete_attachment( $attach_id );
@@ -557,8 +566,12 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false 
 
 			?>
 			</table>
-			<br/>
-			<p><?php _e( 'Process finished you can go', 'import-users-from-csv-with-meta' ); ?> <a href="<?php echo get_admin_url( null, 'users.php' ); ?>"><?php _e( 'here to see results', 'import-users-from-csv-with-meta' ); ?></a></p>
+
+			<?php if( !$is_frontend ): ?>
+				<br/>
+				<p><?php _e( 'Process finished you can go', 'import-users-from-csv-with-meta' ); ?> <a href="<?php echo get_admin_url( null, 'users.php' ); ?>"><?php _e( 'here to see results', 'import-users-from-csv-with-meta' ); ?></a></p>
+			<?php endif; ?>
+			
 			<?php
 			ini_set('auto_detect_line_endings',FALSE);
 			
@@ -586,6 +599,10 @@ function acui_options(){
       		case 'homepage':
       			acui_fileupload_process( $_POST, false );
       			return;
+      		break;
+
+      		case 'frontend':
+      			acui_manage_frontend_process( $_POST );
       		break;
 
       		case 'columns':
@@ -852,6 +869,11 @@ function acui_options(){
 		</div>
 
 		<div class="sidebar">
+			<div class="sidebar_section" style="padding:0 !important;border:none !important;background:none !important;">
+				<a href="https://codection.com/how-to-transfer-your-website-to-inmotion-hosting/" target="_blank">
+					<img src="<?php echo plugin_dir_url( __FILE__ ); ?>assets/codection-inmotion.png">
+				</a>
+			</div>
 			<div class="sidebar_section" id="vote_us">
 				<h3>Rate Us</h3>
 				<ul>
@@ -947,6 +969,82 @@ function acui_options(){
 	<?php 
 
 	break;
+
+	case 'frontend':
+
+	$send_mail_frontend = get_option( "acui_frontend_send_mail");
+	$send_mail_updated_frontend = get_option( "acui_frontend_send_mail_updated");
+	$role = get_option( "acui_frontend_role");
+	
+	if( empty( $send_mail_frontend ) )
+		$send_mail_frontend = false;
+
+	if( empty( $send_mail_updated_frontend ) )
+		$send_mail_updated_frontend = false;
+	?>
+		<h3><?php _e( "Execute an import of users in the frontend", 'import-users-from-csv-with-meta' ); ?></h3>
+
+		<form method="POST" enctype="multipart/form-data" action="" accept-charset="utf-8">
+			<table class="form-table">
+				<tbody>
+				<tr class="form-field">
+					<th scope="row"><label for=""><?php _e( 'Use this shortcode in any page or post', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<pre>[import-users-from-csv-with-meta]</pre>
+						<input class="button-primary" type="button" id="copy_to_clipboard" value="<?php _e( 'Copy to clipboard', 'import-users-from-csv-with-meta'); ?>"/>
+					</td>
+				</tr>
+				<tr class="form-field form-required">
+					<th scope="row"><label for="send-mail-frontend"><?php _e( 'Send mail when using frontend import?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<input type="checkbox" name="send-mail-frontend" value="yes" <?php if( $send_mail_frontend == true ) echo "checked='checked'"; ?>/>
+					</td>
+				</tr>
+				<tr class="form-field form-required">
+					<th scope="row"><label for="send-mail-updated-frontend"><?php _e( 'Send mail also to users that are being updated?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<input type="checkbox" name="send-mail-updated-frontend" value="yes" <?php if( $send_mail_updated_frontend == true ) echo "checked='checked'"; ?>/>
+					</td>
+				</tr>
+				<tr class="form-field form-required">
+					<th scope="row"><label for="role"><?php _e( 'Role', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<select id="role-frontend" name="role-frontend">
+							<?php 
+								if( $role == '' )
+									echo "<option selected='selected' value=''>" . __( 'Disable role assignement in frontend import', 'import-users-from-csv-with-meta' )  . "</option>";
+								else
+									echo "<option value=''>" . __( 'Disable role assignement in frontend import', 'import-users-from-csv-with-meta' )  . "</option>";
+
+								$list_roles = acui_get_editable_roles();								
+								foreach ($list_roles as $key => $value) {
+									if($key == $role)
+										echo "<option selected='selected' value='$key'>$value</option>";
+									else
+										echo "<option value='$key'>$value</option>";
+								}
+							?>
+						</select>
+						<p class="description"><?php _e( 'Which role would be used to import users?', 'import-users-from-csv-with-meta' ); ?></p>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<input class="button-primary" type="submit" value="<?php _e( 'Save frontend import options', 'import-users-from-csv-with-meta'); ?>"/>
+		</form>
+
+		<script>
+		jQuery( document ).ready( function( $ ){
+			$( '#copy_to_clipboard' ).click( function(){
+				var $temp = $("<input>");
+				$("body").append($temp);
+				$temp.val( '[import-users-from-csv-with-meta]' ).select();
+				document.execCommand("copy");
+				$temp.remove();
+			} );
+		});
+		</script>
+	<?php break;
 
 	case 'columns':
 		$show_profile_fields = get_option( "acui_show_profile_fields");

@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.10.13
+Version:		1.11.2
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
@@ -53,6 +53,11 @@ function acui_loader(){
 		add_action( "edit_user_profile_update", "acui_save_extra_user_profile_fields" );
 	}
 
+	// includes
+	foreach ( glob( plugin_dir_path( __FILE__ ) . "include/*.php" ) as $file ) {
+	    include_once( $file );
+	}
+
 	// addons
 	foreach ( glob( plugin_dir_path( __FILE__ ) . "addons/*.php" ) as $file ) {
 	    include_once( $file );
@@ -85,6 +90,10 @@ function acui_activate(){
 	add_option( "acui_cron_period" );
 	add_option( "acui_cron_role" );
 	add_option( "acui_cron_log" );
+
+	add_option( "acui_frontend_send_mail", false );
+	add_option( "acui_frontend_send_mail_updated", false );
+	add_option( "acui_frontend_role" );
 
 	add_option( "acui_manually_send_mail", false );
 	add_option( "acui_manually_send_mail_updated", false );
@@ -124,6 +133,10 @@ function acui_delete_options(){
 	delete_option( "acui_cron_period" );
 	delete_option( "acui_cron_role" );
 	delete_option( "acui_cron_log" );
+
+	delete_option( "acui_frontend_send_mail" );
+	delete_option( "acui_frontend_send_mail_updated" );
+	delete_option( "acui_frontend_role" );
 
 	delete_option( "acui_manually_send_mail" );
 	delete_option( "acui_manually_send_mail_updated" );
@@ -249,6 +262,7 @@ function acui_check_options(){
 function acui_admin_tabs( $current = 'homepage' ) {
     $tabs = array( 
     		'homepage' => __( 'Import users from CSV', 'import-users-from-csv-with-meta' ), 
+    		'frontend' => __( 'Frontend', 'import-users-from-csv-with-meta' ), 
     		'columns' => __( 'Extra profile fields', 'import-users-from-csv-with-meta' ), 
     		'mail-options' => __( 'Mail options', 'import-users-from-csv-with-meta' ), 
     		'smtp-settings' => __( 'SMTP settings', 'import-users-from-csv-with-meta' ), 
@@ -279,8 +293,8 @@ function acui_admin_tabs( $current = 'homepage' ) {
     echo '</h2>';
 }
 
-function acui_fileupload_process( $form_data, $is_cron = false ) {
-  if ( !$is_cron && ( ! isset( $_POST['acui-nonce'] ) || ! wp_verify_nonce( $_POST['acui-nonce'], 'acui-import' ) ) ){
+function acui_fileupload_process( $form_data, $is_cron = false, $is_frontend  = false ) {
+  if ( !( $is_cron || $is_frontend ) && ( ! isset( $_POST['acui-nonce'] ) || ! wp_verify_nonce( $_POST['acui-nonce'], 'acui-import' ) ) ){
 	wp_die( 'Nonce problem' );
   }
 
@@ -293,7 +307,7 @@ function acui_fileupload_process( $form_data, $is_cron = false ) {
   	  if( !file_exists ( $path_to_file ) )
   			wp_die( __( 'Error, we cannot find the file', 'import-users-from-csv-with-meta' ) . ": $path_to_file" );
 
-  	acui_import_users( $path_to_file, $form_data, 0, $is_cron );
+  	acui_import_users( $path_to_file, $form_data, 0, $is_cron, $is_frontend );
 
   else:
   	 
@@ -365,6 +379,27 @@ function acui_fileupload_process( $form_data, $is_cron = false ) {
 	  }
   endif;
 }
+
+function acui_manage_frontend_process( $form_data ){
+	if( isset( $form_data["send-mail-frontend"] ) && $form_data["send-mail-frontend"] == "yes" )
+		update_option( "acui_frontend_send_mail", true );
+	else
+		update_option( "acui_frontend_send_mail", false );
+
+	if( isset( $form_data["send-mail-updated-frontend"] ) && $form_data["send-mail-updated-frontend"] == "yes" )
+		update_option( "acui_frontend_send_mail_updated", true );
+	else
+		update_option( "acui_frontend_send_mail_updated", false );
+
+	update_option( "acui_frontend_role", $form_data["role-frontend"] );
+	?>
+
+	<div class="updated">
+       <p><?php _e( 'Settings updated correctly', 'import-users-from-csv-with-meta' ) ?></p>
+    </div>
+    <?php
+}
+
 
 function acui_manage_extra_profile_fields( $form_data ){
 	if( isset( $form_data["show-profile-fields"] ) && $form_data["show-profile-fields"] == "yes" ){
