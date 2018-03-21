@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.11.2
+Version:		1.11.3.1
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
@@ -90,7 +90,8 @@ function acui_activate(){
 	add_option( "acui_cron_period" );
 	add_option( "acui_cron_role" );
 	add_option( "acui_cron_log" );
-
+	add_option( "acui_cron_allow_multiple_accounts", "not_allowed" );
+	
 	add_option( "acui_frontend_send_mail", false );
 	add_option( "acui_frontend_send_mail_updated", false );
 	add_option( "acui_frontend_role" );
@@ -133,6 +134,7 @@ function acui_delete_options(){
 	delete_option( "acui_cron_period" );
 	delete_option( "acui_cron_role" );
 	delete_option( "acui_cron_log" );
+	delete_option( "acui_cron_allow_multiple_accounts" );
 
 	delete_option( "acui_frontend_send_mail" );
 	delete_option( "acui_frontend_send_mail_updated" );
@@ -460,7 +462,12 @@ function acui_manage_cron_process( $form_data ){
 		update_option( "acui_cron_path_to_move_auto_rename", true );
 	else
 		update_option( "acui_cron_path_to_move_auto_rename", false );
-
+	
+	if ( isset ( $form_data["allow_multiple_accounts"] ) && $form_data["allow_multiple_accounts"] == "yes" )
+		update_option( "acui_cron_allow_multiple_accounts", "allowed" );
+	else
+		update_option( "acui_cron_allow_multiple_accounts", "not_allowed" );
+	
 	update_option( "acui_cron_path_to_file", $form_data["path_to_file"] );
 	update_option( "acui_cron_path_to_move", $form_data["path_to_move"] );
 	update_option( "acui_cron_period", $form_data["period"] );

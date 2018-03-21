@@ -48,12 +48,22 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 				$activate_users_wp_members = "no_activate";
 			else
 				$activate_users_wp_members = $form_data["activate_users_wp_members"];
-
-			if( empty( $form_data["allow_multiple_accounts"] ) )
-				$allow_multiple_accounts = "not_allowed";
-			else
-				$allow_multiple_accounts = $form_data["allow_multiple_accounts"];
-
+	
+			if( $is_cron ){
+				if( get_option( "acui_cron_allow_multiple_accounts" ) == "allowed" ){
+					$allow_multiple_accounts = "allowed";						
+				}
+				else {
+					$allow_multiple_accounts = "not_allowed";
+				}
+			}
+			else {
+				if( empty( $form_data["allow_multiple_accounts"] ) )
+					$allow_multiple_accounts = "not_allowed";	
+				else
+					$allow_multiple_accounts = $form_data["allow_multiple_accounts"];
+			}
+	
 			if( empty( $form_data["approve_users_new_user_appove"] ) )
 				$approve_users_new_user_appove = "no_approve";
 			else
@@ -264,11 +274,21 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 	                    $created = false;
 					}
 					elseif( email_exists( $email ) && $allow_multiple_accounts == "allowed" ){ // if the email is registered and repeated emails are allowed
+						// if user is new, but the password in csv is empty, generate a password for this user
+						if( $password === "" ) {
+							$password = wp_generate_password();
+						}
+						
 						$hacked_email = acui_hack_email( $email );
 						$user_id = wp_create_user( $username, $password, $hacked_email );
 						acui_hack_restore_remapped_email_address( $user_id, $email );
 					}
 					else{
+						// if user is new, but the password in csv is empty, generate a password for this user
+						if( $password === "" ) {
+							$password = wp_generate_password();
+						}
+						
 						$user_id = wp_create_user( $username, $password, $email );
 					}
 						
@@ -1313,6 +1333,7 @@ function acui_options(){
 	$path_to_move = get_option( "acui_cron_path_to_move");
 	$path_to_move_auto_rename = get_option( "acui_cron_path_to_move_auto_rename");
 	$log = get_option( "acui_cron_log");
+	$allow_multiple_accounts = get_option("acui_cron_allow_multiple_accounts");
 
 	if( empty( $cron_activated ) )
 		$cron_activated = false;
@@ -1346,6 +1367,9 @@ function acui_options(){
 
 	if( empty( $log ) )
 		$log = "No tasks done yet.";
+	
+	if( empty( $allow_multiple_accounts ) )
+		$allow_multiple_accounts = "not_allowed";
 
 	?>
 		<h3><?php _e( "Execute an import of users periodically", 'import-users-from-csv-with-meta' ); ?></h3>
@@ -1389,6 +1413,19 @@ function acui_options(){
 						<input type="checkbox" name="send-mail-updated" value="yes" <?php if( $send_mail_updated == true ) echo "checked='checked'"; ?>/>
 					</td>
 				</tr>
+				
+				<?php if( is_plugin_active( 'allow-multiple-accounts/allow-multiple-accounts.php' ) ): ?>
+
+				<tr class="form-field form-required">
+					<th scope="row"><label><?php _e( 'Repeated email in different users?', 'import-users-from-csv-with-meta' ); ?></label></th>
+					<td>
+						<input type="checkbox" name="allow_multiple_accounts" value="yes" <?php if( $allow_multiple_accounts == "allowed" ) echo "checked='checked'"; ?>/>
+						<p class="description"><strong>(<?php _e( 'Only for', 'import-users-from-csv-with-meta' ); ?> <a href="https://wordpress.org/plugins/allow-multiple-accounts/"><?php _e( 'Allow Multiple Accounts', 'import-users-from-csv-with-meta' ); ?></a> <?php _e( 'users', 'import-users-from-csv-with-meta'); ?>)</strong>. <?php _e('Allow multiple user accounts to be created having the same email address.','import-users-from-csv-with-meta' ); ?></p>
+					</td>
+				</tr>
+
+				<?php endif; ?>
+				
 				<tr class="form-field form-required">
 					<th scope="row"><label for="cron-delete-users"><?php _e( 'Delete users that are not present in the CSV?', 'import-users-from-csv-with-meta' ); ?></label></th>
 					<td>

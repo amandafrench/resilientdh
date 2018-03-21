@@ -4,7 +4,7 @@ Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
 Tested up to: 4.9.4
-Stable tag: 1.11.2
+Stable tag: 1.11.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,12 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.11.3.1 =
+*	Thanks to Sebastian Mellmann(@xenator) a bug have been solved in password management in new users
+
+= 1.11.3 =
+*	Thanks to @xenator you can now import users with Allow Multiple Accounts with same Mail via cron
 
 = 1.11.2 =
 *	Problem with WordPress default emails fixed
