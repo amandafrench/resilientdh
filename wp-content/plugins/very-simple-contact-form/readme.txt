@@ -1,7 +1,7 @@
 === Very Simple Contact Form ===
 Contributors: Guido07111975
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donation%40guidovanderleest%2enl
-Version: 8.1
+Version: 8.2
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 3.7
@@ -172,6 +172,11 @@ Please open a topic in plugin forum.
 
 
 == Changelog ==
+= Version 8.2 =
+* removed the capability to create new submission in dashboard
+* changed the id of custom admin columns
+* updated file vscf
+
 = Version 8.1 =
 * some textual changes on settingspage
 
@@ -187,13 +192,6 @@ Please open a topic in plugin forum.
 
 = Version 7.8 =
 * updated privacy consent notification in email to admin and in dashboard 
-
-= Version 7.7 =
-* new: activate a privacy checkbox so that your form complies with the GDPR
-* if activated, user must consent to the collection of name, email and IP address
-* you can set this via the settingspage
-* added a privacy consent notification in email to admin and in dashboard
-* thanks nimrod54 for informing me about this
 
 For all versions please check file changelog.
 

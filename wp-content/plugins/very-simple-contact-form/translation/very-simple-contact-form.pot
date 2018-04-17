@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Very Simple Contact Form\n"
-"POT-Creation-Date: 2018-04-12 22:57+0200\n"
+"POT-Creation-Date: 2018-04-14 16:40+0200\n"
 "PO-Revision-Date: 2015-08-14 23:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,12 +20,12 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: vscf-form.php:49 vscf-options.php:31 vscf-options.php:108
-#: vscf-widget-form.php:49 vscf.php:64
+#: vscf-widget-form.php:49 vscf.php:62
 msgid "Name"
 msgstr ""
 
 #: vscf-form.php:52 vscf-options.php:34 vscf-options.php:114
-#: vscf-widget-form.php:52 vscf.php:65
+#: vscf-widget-form.php:52 vscf.php:63
 msgid "Email"
 msgstr ""
 
@@ -209,12 +209,8 @@ msgstr ""
 msgid "Attributes"
 msgstr ""
 
-#: vscf-widget.php:38 vscf.php:122
+#: vscf-widget.php:38 vscf.php:120
 msgid "Settings"
-msgstr ""
-
-#: vscf.php:45
-msgid "Submission"
 msgstr ""
 
 #. Description of the plugin/theme
