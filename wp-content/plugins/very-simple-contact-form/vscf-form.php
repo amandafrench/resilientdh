@@ -333,7 +333,7 @@ function vscf_shortcode($vscf_atts) {
 		</div>
 		<div'.(isset($hide_privacy) ? ' class="hide"' : ' class="form-group"').'>
 			<input type="hidden" name="vscf_privacy" id="vscf_privacy" value="no">
-			<label><input type="checkbox" name="vscf_privacy" id="vscf_privacy" value="yes" '.checked( esc_attr($form_data['form_privacy']), "yes", false ).' /> <span class="'.(isset($error_class['form_privacy']) ? "error" : "").'" >'.esc_attr($privacy_label).'</span></label>
+			<label><input type="checkbox" name="vscf_privacy" id="vscf_privacy" class="custom-control-input" value="yes" '.checked( esc_attr($form_data['form_privacy']), "yes", false ).' /> <span class="'.(isset($error_class['form_privacy']) ? "error" : "").'" >'.esc_attr($privacy_label).'</span></label>
 		</div>
 		<div class="form-group hide">
 			'. $nonce .'

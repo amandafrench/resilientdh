@@ -1,7 +1,7 @@
 === Very Simple Contact Form ===
 Contributors: Guido07111975
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donation%40guidovanderleest%2enl
-Version: 8.3
+Version: 8.4
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 3.7
@@ -46,12 +46,12 @@ Several settings can be overwritten when using the relevant (shortcode) attribut
 * Change admin email address: `[contact email_to="your-email-here"]`
 * Send to multiple email addresses: `[contact email_to="first-email-here, second-email-here"]`
 * Change "From" email header: `[contact from_header="your-email-here"]`
+* Hide subject field: `[contact hide_subject="true"]`
 * Change email subject: `[contact subject="your subject here"]`
 * Activate confirmation email to sender: `[contact auto_reply="true"]`
 * Change "thank you" message in confirmation email: `[contact auto_reply_message="your message here"]`
-* Hide subject field: `[contact hide_subject="true"]`
-* Scroll back to form location after submit: `[contact scroll_to_form="true"]`
 * Change sending succeeded ("thank you") message: `[contact message_success="your message here"]`
+* Scroll back to form location after submit: `[contact scroll_to_form="true"]`
 
 You can also add multiple attributes. Use a single whitespace to separate multiple attributes.
 
@@ -82,7 +82,7 @@ SMTP (Simple Mail Transfer Protocol) is an internet standard for sending emails.
 
 WordPress supports the PHP `mail()` function by default, but when using SMTP there's less chance your form submissions are being marked as spam.
 
-You must install an additional plugin for this. I have tested my plugin with these SMTP plugins:
+You should install an additional plugin for this. You could install for example:
 
 * [Gmail SMTP](https://wordpress.org/plugins/gmail-smtp/)
 * [Easy WP SMTP](https://wordpress.org/plugins/easy-wp-smtp/)
@@ -120,7 +120,7 @@ You can change this subject using an attribute.
 
 This subject will also be used in the confirmation email to sender (if activated).
 
-= Why is the "from" email not from sender? =
+= Why is the "from" email address not from sender? =
 I have used a default so called "From" email header to avoid form submissions being marked as spam.
 
 Best practice is using a "From" email header (an email address) that ends with your site domain.
@@ -136,17 +136,7 @@ A "thank you" message is displayed after submitting the form and in the confirma
 
 It's the (translated) message: Thank you! You will receive a response as soon as possible.
 
-You can change this message using an attribute or via Settings > VSCF.
-
-= Does VSCF comply with the GDPR? =
-The General Data Protection Regulation (GDPR) is a regulation in EU law on data protection and privacy for all individuals within the European Union.
-
-I did my best to meet the conditions of the GDPR:
-
-* You can activate a privacy checkbox on form
-* You can disable the collection of IP address
-* The cookie (used for the captcha number) does not store personal data
-* You can delete form submissions from the database
+You can change this message via Settings > VSCF or using an attribute.
 
 = Can I use multiple shortcodes? =
 Do not use multiple shortcodes on the same page. This might cause a conflict.
@@ -166,7 +156,7 @@ They might advice you to install a SMTP plugin.
 * Install another contact form plugin (such as Contact Form 7) to determine whether it's caused by my plugin or something else.
 * In case you're using a SMTP plugin, please check their settingspage for mistakes.
 
-= Why does the captcha number not display properly? =
+= Why does the captcha not display properly? =
 The captcha (random number) uses a php session and cookie to temporary store the number.
 
 Your hosting provider might have disabled the use of sessions. Ask them for more info about this.
@@ -178,6 +168,17 @@ Of course, the default WordPress sanitization and escaping functions are include
 
 It also contains 2 (invisible) honeypot fields (firstname and lastname) and a simple captcha (random number).
 
+= Does VSCF meet the conditions of the GDPR? =
+The General Data Protection Regulation (GDPR) is a regulation in EU law on data protection and privacy for all individuals within the European Union.
+
+I did my best to meet the conditions of the GDPR:
+
+* You can activate a privacy checkbox on form
+* You can disable the collection of IP address
+* The cookie (used for the captcha number) does not store personal data
+* Form submissions are safely stored in database, similar to how the native posts and pages are stored
+* You can easily delete form submissions from database
+
 = How can I make a donation? =
 You like my plugin and you're willing to make a donation? Nice! There's a PayPal donate link on the WordPress plugin page and my website.
 
@@ -186,6 +187,11 @@ Please open a topic in plugin forum.
 
 
 == Changelog ==
+= Version 8.4 =
+* added bootstrap css class to privacy checkbox
+* minor change in file vscf-style
+* updated readme file
+
 = Version 8.3 =
 * new: disable the collection of ip address (thanks marie)
 * updated most files
@@ -202,11 +208,6 @@ Please open a topic in plugin forum.
 * name and email column on submissions page are now sortable
 * updated the changelog of last versions (hopefully more clear now)
 * did this because of the many changes in last versions
-
-= Version 7.9 =
-* fix: email label validation on settingspage (thanks gerard1964)
-* new: added name and email column on submissions page
-* updated privacy consent notification in email to admin and in dashboard (again)
 
 For all versions please check file changelog.
 

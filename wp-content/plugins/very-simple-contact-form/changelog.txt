@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+= Version 8.4 =
+* added bootstrap css class to privacy checkbox
+* minor change in file vscf-style
+* updated readme file
+
 = Version 8.3 =
 * new: disable the collection of ip address (thanks marie)
 * updated most files
