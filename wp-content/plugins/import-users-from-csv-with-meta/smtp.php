@@ -116,6 +116,7 @@ function acui_smtp() {
 	
 <div class="wrap">
 	<h2><?php _e('Import User From CSV With Meta - SMTP server options', 'acui'); ?></h2>
+	<div style="background-color: red; color: white;">This feature is deprecated. Please use better a SMTP plugin from the repository specialized in this kind of configurations.</div>
 	<form method="post" action="" id="acui_smtp_options">
 		<?php wp_nonce_field('email-config'); ?>
 

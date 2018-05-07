@@ -309,16 +309,16 @@ function acui_import_users( $file, $form_data, $attach_id = 0, $is_cron = false,
 								foreach ( $default_roles as $default_role ) {
 									$user_object->remove_role( $default_role );
 								}
-							}
-							
-							if( !empty( $role ) ){
-								if( is_array( $role ) ){
-									foreach ($role as $single_role) {
-										$user_object->add_role( $single_role );
-									}	
-								}
-								else{
-									$user_object->add_role( $role );
+
+								if( !empty( $role ) ){
+									if( is_array( $role ) ){
+										foreach ($role as $single_role) {
+											$user_object->add_role( $single_role );
+										}	
+									}
+									else{
+										$user_object->add_role( $role );
+									}
 								}
 							}
 						}
@@ -889,11 +889,30 @@ function acui_options(){
 		</div>
 
 		<div class="sidebar">
+			<div class="sidebar_section become_patreon">
+		    	<a class="patreon" color="primary" type="button" name="become-a-patron" data-tag="become-patron-button" href="https://www.patreon.com/bePatron?c=1741454" role="button">
+		    		<div><span><?php _e( 'Become a patron', 'import-users-from-csv-with-meta'); ?></span></div>
+		    	</a>
+		    </div>
+
+		    <?php if( substr( get_locale(), 0, 2 ) == 'es' ): ?>
+			<div class="sidebar_section" id="webempresa">
+				<h3>Tu web más rápida con Webempresa</h3>
+				<ul>
+					<li><label>Además ahora un <a href="https://codection.com/25-de-descuento-en-el-mejor-hosting-en-espanol-con-webempresa/">25% de descuento</a>.</label></li>
+				</ul>
+				<a href="https://codection.com/25-de-descuento-en-el-mejor-hosting-en-espanol-con-webempresa/" target="_blank">
+					<img src="<?php echo plugin_dir_url( __FILE__ ); ?>assets/webempresa_logo.png">
+				</a>
+			</div>
+			<?php else: ?>
 			<div class="sidebar_section" style="padding:0 !important;border:none !important;background:none !important;">
 				<a href="https://codection.com/how-to-transfer-your-website-to-inmotion-hosting/" target="_blank">
 					<img src="<?php echo plugin_dir_url( __FILE__ ); ?>assets/codection-inmotion.png">
 				</a>
 			</div>
+			<?php endif; ?>
+			
 			<div class="sidebar_section" id="vote_us">
 				<h3>Rate Us</h3>
 				<ul>
@@ -1554,7 +1573,7 @@ function acui_options(){
 
 	    <div class="inside" style="display: block;">
 	        <img src="<?php echo $url_plugin; ?>icon_coffee.png" alt="<?php _e( 'buy me a coffee', 'import-users-from-csv-with-meta' ); ?>" style=" margin: 5px; float:left;">
-	        <p><?php _e( 'Hi! we are', 'import-users-from-csv-with-meta'); ?> <a href="https://twitter.com/fjcarazo" target="_blank" title="Javier Carazo">Javier Carazo</a> <?php _e( 'and', 'import-users-from-csv-with-meta' ); ?> <a href="https://twitter.com/ahornero" target="_blank" title="Alberto Hornero">Alberto Hornero</a> <?php _e( 'from', 'import-users-from-csv-with-meta' ); ?> <a href="http://codection.com">Codection</a>, <?php _e("developers of this plugin.", 'import-users-from-csv-with-meta' ); ?></p>
+	        <p><?php _e( 'Hi! we are', 'import-users-from-csv-with-meta'); ?> <a href="https://twitter.com/fjcarazo" target="_blank" title="Javier Carazo">Javier Carazo</a> <?php _e( 'and all the team of', 'import-users-from-csv-with-meta' ); ?> <a href="http://codection.com">Codection</a>, <?php _e("developers of this plugin.", 'import-users-from-csv-with-meta' ); ?></p>
 	        <p><?php _e( 'We have been spending many hours to develop this plugin and answering questions in the forum to give you the best support. <br>If you like and use this plugin, you can <strong>buy us a cup of coffee</strong>.', 'import-users-from-csv-with-meta' ); ?></p>
 	        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 				<input type="hidden" name="cmd" value="_s-xclick">
@@ -1563,6 +1582,14 @@ function acui_options(){
 				<img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
 			</form>
 	        <div style="clear:both;"></div>
+	    </div>
+
+	    <h3 class="hndle"><span>&nbsp;<?php _e( 'Or if you prefer, you can also help us becoming a Patreon:', 'import-users-from-csv-with-meta' ); ?></span></h3>
+
+	    <div class="inside acui" style="display: block;">
+	    	<a class="patreon" color="primary" type="button" name="become-a-patron" data-tag="become-patron-button" href="https://www.patreon.com/bePatron?c=1741454" role="button">
+	    		<div class="oosjif-1 jFPfxp"><span>Become a patron</span></div>
+	    	</a>
 	    </div>
 	</div>
 

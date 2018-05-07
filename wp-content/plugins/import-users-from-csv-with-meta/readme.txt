@@ -4,7 +4,7 @@ Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
 Tested up to: 4.9.4
-Stable tag: 1.11.3.1
+Stable tag: 1.11.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,14 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.11.3.3 =
+*	Added compatibility to import levels from Indeed Ultimate Membership Pro
+*	Fixed role problems when importing
+
+= 1.11.3.2 =
+*	Patreon link included and some other improvements to make easier support this develop
+*	Deprecated notices included about SMTP settings in this plugin
 
 = 1.11.3.1 =
 *	Thanks to Sebastian Mellmann(@xenator) a bug have been solved in password management in new users
