@@ -12,7 +12,7 @@
 <?php get_header(); ?>
 
 		<div id="container">
-			<div id="content" role="main">
+			<div id="content-full" role="main">
 
 				<?php do_action( 'bbp_template_notices' ); ?>
 
@@ -40,5 +40,4 @@
 			</div><!-- #content -->
 		</div><!-- #container -->
 
-<?php get_sidebar( 'buddypress' ); ?>
 <?php get_footer(); ?>
