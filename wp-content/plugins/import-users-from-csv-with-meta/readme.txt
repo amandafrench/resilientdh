@@ -4,7 +4,7 @@ Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
 Tested up to: 4.9.4
-Stable tag: 1.11.3.3
+Stable tag: 1.11.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,9 @@ Plugin will automatically detect:
 5. Extra profile information (user meta)
 
 == Changelog ==
+
+= 1.11.3.4 =
+*	Bug fixed: thanks to @oldfieldmike for reporting and fixing a bug present when BuddyPress was active (https://wordpress.org/support/topic/bp_xprofile_group/#post-10265833)
 
 = 1.11.3.3 =
 *	Added compatibility to import levels from Indeed Ultimate Membership Pro

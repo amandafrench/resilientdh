@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.11.3.3
+Version:		1.11.3.4
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
@@ -45,6 +45,10 @@ function acui_loader(){
 	add_action( 'wp_ajax_acui_delete_attachment', 'acui_delete_attachment' );
 	add_action( 'wp_ajax_acui_bulk_delete_attachment', 'acui_bulk_delete_attachment' );
 	add_action( 'acui_cron_process', 'acui_cron_process' );
+
+	if( is_plugin_active( 'buddypress/bp-loader.php' ) && file_exists( plugin_dir_path( __DIR__ ) . 'buddypress/bp-xprofile/classes/class-bp-xprofile-group.php' ) ){
+		require_once( plugin_dir_path( __DIR__ ) . 'buddypress/bp-xprofile/classes/class-bp-xprofile-group.php' );	
+	}
 
 	if( get_option( 'acui_show_profile_fields' ) == true ){
 		add_action( "show_user_profile", "acui_extra_user_profile_fields" );
