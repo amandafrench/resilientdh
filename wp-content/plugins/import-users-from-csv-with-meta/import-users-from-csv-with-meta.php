@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.11.3.4
+Version:		1.11.3.5
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
@@ -278,6 +278,9 @@ function acui_admin_tabs( $current = 'homepage' ) {
     		'shop' => __( 'Shop', 'import-users-from-csv-with-meta' ), 
     		'help' => __( 'Hire an expert', 'import-users-from-csv-with-meta' )
     );
+
+    if( get_option( "acui_settings" ) == "wordpress"  )
+    	unset( $tabs['smtp-settings'] );
 
     echo '<div id="icon-themes" class="icon32"><br></div>';
     echo '<h2 class="nav-tab-wrapper">';
