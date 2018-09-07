@@ -3,8 +3,8 @@ Contributors: carazo, hornero
 Donate link: http://paypal.me/codection
 Tags: csv, import, importer, meta data, meta, user, users, user meta,  editor, profile, custom, fields, delimiter, update, insert
 Requires at least: 3.4
-Tested up to: 4.9.6
-Stable tag: 1.11.3.5
+Tested up to: 4.9.8
+Stable tag: 1.11.3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,8 +71,25 @@ Plugin will automatically detect:
 
 == Changelog ==
 
-= 1.11.3.4 =
-*	SMTP tab hidden for user which are not using this option.
+= 1.11.3.9 =
+*	New hooks added thanks to @malcolm-oph (https://wordpress.org/support/topic/using-filters-to-add-data-columns/)
+
+= 1.11.3.8.1 =
+*	Fixed bug thanks to @xenator for discovering the bug (https://wordpress.org/support/topic/uncaught-error-while-importing-users/#post-10618130)
+
+= 1.11.3.8 =
+*	Fixed mail sending in frontend import
+*	Now you can activate users with WP Members in frontend import
+*	Some fixes and warnings added
+
+= 1.11.3.7 =
+*	Fixes and improvements thanks to @malcolm-oph
+
+= 1.11.3.6 =
+*	Role import working in cron jobs
+
+= 1.11.3.5 =
+*	SMTP tab hidden for user which are not using this option
 
 = 1.11.3.4 =
 *	Bug fixed: thanks to @oldfieldmike for reporting and fixing a bug present when BuddyPress was active (https://wordpress.org/support/topic/bp_xprofile_group/#post-10265833)

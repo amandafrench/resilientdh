@@ -15,11 +15,27 @@ function vscf_widget_shortcode($vscf_atts) {
 		"from_header" => vscf_from_header(),
 		"subject" => '',
 		"hide_subject" => '',
+		"scroll_to_form" => '',
 		"auto_reply" => '',
 		"auto_reply_message" => '',
+		"label_name" => '',
+		"label_email" => '',
+		"label_subject" => '',
+		"label_captcha" => '',
+		"label_message" => '',
+		"label_privacy" => '',
+		"label_submit" => '',
+		"error_name" => '',
+		"error_email" => '',
+		"error_subject" => '',
+		"error_captcha" => '',
+		"error_message" => '',
 		"message_success" => '',
-		"scroll_to_form" => ''
+		"message_error" => ''
 	), $vscf_atts);
+
+	// get decoded site name
+	$blog_name = htmlspecialchars_decode(get_bloginfo('name'), ENT_QUOTES); 
 
 	// get custom settings from settingspage
 	$list_submissions_setting = esc_attr(get_option('vscf-setting-2'));
@@ -27,98 +43,19 @@ function vscf_widget_shortcode($vscf_atts) {
 	$privacy_setting = esc_attr(get_option('vscf-setting-4'));
 	$ip_address_setting = esc_attr(get_option('vscf-setting-19'));
 
-	// get custom messages from settingspage
-	$server_error_message = esc_attr(get_option('vscf-setting-15'));
-	$thank_you_message = esc_attr(get_option('vscf-setting-16'));
-	$auto_reply_message = esc_attr(get_option('vscf-setting-17'));
+	// include labels
+	include 'vscf-labels.php';
 
-	// get custom labels from settingspage
-	$name_label = esc_attr(get_option('vscf-setting-5'));
-	$email_label = esc_attr(get_option('vscf-setting-6'));
-	$subject_label = esc_attr(get_option('vscf-setting-7'));
-	$captcha_label = esc_attr(get_option('vscf-setting-8'));
-	$message_label = esc_attr(get_option('vscf-setting-9'));
-	$privacy_label = esc_attr(get_option('vscf-setting-18'));
-	$submit_label = esc_attr(get_option('vscf-setting-10'));
-	$error_input_label = esc_attr(get_option('vscf-setting-11'));
-	$error_textarea_label = esc_attr(get_option('vscf-setting-12'));
-	$error_email_label = esc_attr(get_option('vscf-setting-13'));
-	$error_captcha_label = esc_attr(get_option('vscf-setting-14'));
-
-	// show default label if no custom label is set
-	if (empty($name_label)) {
-		$name_label = esc_attr__( 'Name', 'very-simple-contact-form' );
-	}
-	if (empty($email_label)) {
-		$email_label = esc_attr__( 'Email', 'very-simple-contact-form' );
-	}
-	if (empty($subject_label)) {
-		$subject_label = esc_attr__( 'Subject', 'very-simple-contact-form' );
-	}
-	if (empty($captcha_label)) {
-		$captcha_label = esc_attr__( 'Enter number %s', 'very-simple-contact-form' );
-	}
-	if (empty($message_label)) {
-		$message_label = esc_attr__( 'Message', 'very-simple-contact-form' );
-	}
-	if (empty($privacy_label)) {
-		$privacy_label = esc_attr__( 'I consent to having this website collect my personal data via this form.', 'very-simple-contact-form' );
-	}
-	if (empty($submit_label)) {
-		$submit_label = esc_attr__( 'Submit', 'very-simple-contact-form' );
-	}
-	if (empty($error_input_label)) {
-		$error_input_label = esc_attr__( 'Please enter at least 2 characters', 'very-simple-contact-form' );
-	}
-	if (empty($error_textarea_label)) {
-		$error_textarea_label = esc_attr__( 'Please enter at least 10 characters', 'very-simple-contact-form' );
-	}
-	if (empty($error_email_label)) {
-		$error_email_label = esc_attr__( 'Please enter a valid email', 'very-simple-contact-form' );
-	}
-	if (empty($error_captcha_label)) {
-		$error_captcha_label = esc_attr__( 'Please enter the correct number', 'very-simple-contact-form' );
-	}
-
-	// show default message if no custom message is set
-	if (empty($server_error_message)) {
-		$server_error_message = esc_attr__( 'Error! Could not send form. This might be a server issue.', 'very-simple-contact-form' );
-	}
-
-	// thank you message
-	$value = $thank_you_message;
-	if (empty($vscf_atts['message_success'])) {
-		if (empty($value)) {
-			$thank_you_message = esc_attr__( 'Thank you! You will receive a response as soon as possible.', 'very-simple-contact-form' );
-		} else {
-			$thank_you_message = $value;
-		}
-	} else {
-		$thank_you_message = $vscf_atts['message_success'];
-	}
-
-	// auto reply message
-	$value = $auto_reply_message;
-	if (empty($vscf_atts['auto_reply_message'])) {
-		if (empty($value)) {
-			$auto_reply_message = esc_attr__( 'Thank you! You will receive a response as soon as possible.', 'very-simple-contact-form' );
-		} else {
-			$auto_reply_message = $value;
-		}
-	} else {
-		$auto_reply_message = $vscf_atts['auto_reply_message'];
-	}
-
-	// set variables 
+	// set variables
 	$form_data = array(
 		'form_name' => '',
 		'form_email' => '',
 		'form_subject' => '',
 		'form_captcha' => '',
+		'form_message' => '',
 		'form_privacy' => '',
 		'form_firstname' => '',
-		'form_lastname' => '',
-		'form_message' => ''
+		'form_lastname' => ''
 	);
 	$error = false;
 	$sent = false;
@@ -131,15 +68,15 @@ function vscf_widget_shortcode($vscf_atts) {
 			'form_name' => sanitize_text_field($_POST['vscf_name']),
 			'form_email' => sanitize_email($_POST['vscf_email']),
 			'form_subject' => sanitize_text_field($_POST['vscf_subject']),
-			'form_message' => wp_kses_post($_POST['vscf_message']),
 			'form_captcha' => sanitize_text_field($_POST['vscf_captcha']),
+			'form_message' => sanitize_textarea_field($_POST['vscf_message']),
 			'form_privacy' => sanitize_key($_POST['vscf_privacy']),
 			'form_firstname' => sanitize_text_field($_POST['vscf_firstname']),
 			'form_lastname' => sanitize_text_field($_POST['vscf_lastname'])
 		);
 
 		// validate name
-		$value = $post_data['form_name'];
+		$value = stripslashes($post_data['form_name']);
 		if ( strlen($value)<2 ) {
 			$error_class['form_name'] = true;
 			$error = true;
@@ -156,7 +93,7 @@ function vscf_widget_shortcode($vscf_atts) {
 
 		// validate subject
 		if ($vscf_atts['hide_subject'] != "true") {		
-			$value = $post_data['form_subject'];
+			$value = stripslashes($post_data['form_subject']);
 			if ( strlen($value)<2 ) {
 				$error_class['form_subject'] = true;
 				$error = true;
@@ -164,31 +101,31 @@ function vscf_widget_shortcode($vscf_atts) {
 			$form_data['form_subject'] = $value;
 		}
 
-		// validate message
-		$value = $post_data['form_message'];
-		if ( strlen($value)<10 ) {
-			$error_class['form_message'] = true;
-			$error = true;
-		}
-		$form_data['form_message'] = $value;
-
 		// validate captcha
-		$value = $post_data['form_captcha'];
+		$value = stripslashes($post_data['form_captcha']);
 		if ( $value != $_SESSION['vscf-widget-rand'] ) { 
 			$error_class['form_captcha'] = true;
 			$error = true;
 		}
 		$form_data['form_captcha'] = $value;
 
+		// validate message
+		$value = stripslashes($post_data['form_message']);
+		if ( strlen($value)<10 ) {
+			$error_class['form_message'] = true;
+			$error = true;
+		}
+		$form_data['form_message'] = $value;
+
 		// validate first honeypot field
-		$value = $post_data['form_firstname'];
+		$value = stripslashes($post_data['form_firstname']);
 		if ( strlen($value)>0 ) {
 			$error = true;
 		}
 		$form_data['form_firstname'] = $value;
 
 		// validate second honeypot field
-		$value = $post_data['form_lastname'];
+		$value = stripslashes($post_data['form_lastname']);
 		if ( strlen($value)>0 ) {
 			$error = true;
 		}
@@ -216,9 +153,9 @@ function vscf_widget_shortcode($vscf_atts) {
 			if (!empty($vscf_atts['subject'])) {	
 				$subject = $vscf_atts['subject'];
 			} elseif ($vscf_atts['hide_subject'] != "true") {
-				$subject = "(".get_bloginfo('name').") " . $form_data['form_subject'];
+				$subject = "(".$blog_name.") " . $form_data['form_subject'];
 			} else {
-				$subject = get_bloginfo('name');
+				$subject = $blog_name;
 			}
 			// auto reply to sender
 			if ($vscf_atts['auto_reply'] == "true") {
@@ -230,8 +167,10 @@ function vscf_widget_shortcode($vscf_atts) {
 			} else {
 				$auto_reply = false;
 			}
-			// set consent
-			$value = $post_data['form_privacy'];
+			// decoded auto reply message
+			$reply_message = htmlspecialchars_decode($auto_reply_message, ENT_QUOTES);
+			// set privacy consent
+			$value = $form_data['form_privacy'];
 			if ( $value ==  "yes" ) {
 				$consent = esc_attr__( 'Yes', 'very-simple-contact-form' );
 			} else {
@@ -246,7 +185,7 @@ function vscf_widget_shortcode($vscf_atts) {
 			// save form submission in database
 			if ($list_submissions_setting == "yes") {
 				$vscf_post_information = array(
-					'post_title' => esc_attr($subject),
+					'post_title' => strip_tags($subject),
 					'post_content' => $form_data['form_name'] . "\r\n\r\n" . $form_data['form_email'] . "\r\n\r\n" . $form_data['form_message'] . "\r\n\r\n" . sprintf( esc_attr__( 'Privacy consent: %s', 'very-simple-contact-form' ), $consent ) . "\r\n\r\n" . $ip_address,
 					'post_type' => 'submission',
 					'post_status' => 'pending',
@@ -260,10 +199,10 @@ function vscf_widget_shortcode($vscf_atts) {
 			$headers .= "Content-Transfer-Encoding: 8bit" . "\r\n";
 			$headers .= "From: ".$form_data['form_name']." <".$from.">" . "\r\n";
 			$headers .= "Reply-To: <".$form_data['form_email'].">" . "\r\n";
-			$auto_reply_content = $auto_reply_message . "\r\n\r\n" . $form_data['form_name'] . "\r\n\r\n" . $form_data['form_email'] . "\r\n\r\n" . $form_data['form_message'] . "\r\n\r\n" . $ip_address; 
+			$auto_reply_content = $reply_message . "\r\n\r\n" . $form_data['form_name'] . "\r\n\r\n" . $form_data['form_email'] . "\r\n\r\n" . $form_data['form_message'] . "\r\n\r\n" . $ip_address; 
 			$auto_reply_headers = "Content-Type: text/plain; charset=UTF-8" . "\r\n";
 			$auto_reply_headers .= "Content-Transfer-Encoding: 8bit" . "\r\n";
-			$auto_reply_headers .= "From: ".get_bloginfo('name')." <".$from.">" . "\r\n";
+			$auto_reply_headers .= "From: ".$blog_name." <".$from.">" . "\r\n";
 			$auto_reply_headers .= "Reply-To: <".$vscf_atts['email_to'].">" . "\r\n";
 
 			if( wp_mail($to, $subject, $content, $headers) ) { 
@@ -306,7 +245,7 @@ function vscf_widget_shortcode($vscf_atts) {
 	// contact form
 	$email_form = '<form class="vscf" id="vscf" method="post" '.$action.'>
 		<div class="form-group">
-			<label for="vscf_name">'.esc_attr($name_label).': <span class="'.(isset($error_class['form_name']) ? "error" : "hide").'" >'.esc_attr($error_input_label).'</span></label>
+			<label for="vscf_name">'.esc_attr($name_label).': <span class="'.(isset($error_class['form_name']) ? "error" : "hide").'" >'.esc_attr($error_name_label).'</span></label>
 			<input type="text" name="vscf_name" id="vscf_name" '.(isset($error_class['form_name']) ? ' class="form-control error"' : ' class="form-control"').' maxlength="50" value="'.esc_attr($form_data['form_name']).'" />
 		</div>
 		<div class="form-group">
@@ -314,7 +253,7 @@ function vscf_widget_shortcode($vscf_atts) {
 			<input type="email" name="vscf_email" id="vscf_email" '.(isset($error_class['form_email']) ? ' class="form-control error"' : ' class="form-control"').' maxlength="50" value="'.esc_attr($form_data['form_email']).'" />
 		</div>
 		<div'.(isset($hide_subject) ? ' class="hide"' : ' class="form-group"').'>
-			<label for="vscf_subject">'.esc_attr($subject_label).': <span class="'.(isset($error_class['form_subject']) ? "error" : "hide").'" >'.esc_attr($error_input_label).'</span></label>
+			<label for="vscf_subject">'.esc_attr($subject_label).': <span class="'.(isset($error_class['form_subject']) ? "error" : "hide").'" >'.esc_attr($error_subject_label).'</span></label>
 			<input type="text" name="vscf_subject" id="vscf_subject" '. (isset($error_class['form_subject']) ? ' class="form-control error"' : ' class="form-control"').' maxlength="50" value="'.esc_attr($form_data['form_subject']).'" />
 		</div>
 		<div class="form-group">
@@ -328,8 +267,8 @@ function vscf_widget_shortcode($vscf_atts) {
 			<input type="text" name="vscf_lastname" id="vscf_lastname" class="form-control" maxlength="50" value="'.esc_attr($form_data['form_lastname']).'" />
 		</div>
 		<div class="form-group">
-			<label for="vscf_message">'.esc_attr($message_label).': <span class="'.(isset($error_class['form_message']) ? "error" : "hide").'" >'.esc_attr($error_textarea_label).'</span></label>
-			<textarea name="vscf_message" id="vscf_message" rows="10" '.(isset($error_class['form_message']) ? ' class="form-control error"' : ' class="form-control"').'>'.wp_kses_post($form_data['form_message']).'</textarea>
+			<label for="vscf_message">'.esc_attr($message_label).': <span class="'.(isset($error_class['form_message']) ? "error" : "hide").'" >'.esc_attr($error_message_label).'</span></label>
+			<textarea name="vscf_message" id="vscf_message" rows="10" '.(isset($error_class['form_message']) ? ' class="form-control error"' : ' class="form-control"').'>'.esc_textarea($form_data['form_message']).'</textarea>
 		</div>
 		<div'.(isset($hide_privacy) ? ' class="hide"' : ' class="form-group"').'>
 			<input type="hidden" name="vscf_privacy" id="vscf_privacy_hidden" value="no">

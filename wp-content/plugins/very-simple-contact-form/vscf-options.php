@@ -52,17 +52,20 @@ function vscf_admin_init() {
 	add_settings_field( 'vscf-field-10', __( 'Submit', 'very-simple-contact-form' ), 'vscf_field_callback_10', 'vscf', 'vscf-section-2' );
 	register_setting( 'vscf-options', 'vscf-setting-10', 'sanitize_text_field' );
 
-	add_settings_field( 'vscf-field-11', __( 'Error input field', 'very-simple-contact-form' ), 'vscf_field_callback_11', 'vscf', 'vscf-section-2' );
+	add_settings_field( 'vscf-field-11', __( 'Error name', 'very-simple-contact-form' ), 'vscf_field_callback_11', 'vscf', 'vscf-section-2' );
 	register_setting( 'vscf-options', 'vscf-setting-11', 'sanitize_text_field' );
-
-	add_settings_field( 'vscf-field-12', __( 'Error textarea', 'very-simple-contact-form' ), 'vscf_field_callback_12', 'vscf', 'vscf-section-2' );
-	register_setting( 'vscf-options', 'vscf-setting-12', 'sanitize_text_field' );
 
 	add_settings_field( 'vscf-field-13', __( 'Error email', 'very-simple-contact-form' ), 'vscf_field_callback_13', 'vscf', 'vscf-section-2' );
 	register_setting( 'vscf-options', 'vscf-setting-13', 'sanitize_text_field' );
 
+	add_settings_field( 'vscf-field-20', __( 'Error subject', 'very-simple-contact-form' ), 'vscf_field_callback_20', 'vscf', 'vscf-section-2' );
+	register_setting( 'vscf-options', 'vscf-setting-20', 'sanitize_text_field' );
+
 	add_settings_field( 'vscf-field-14', __( 'Error captcha', 'very-simple-contact-form' ), 'vscf_field_callback_14', 'vscf', 'vscf-section-2' );
 	register_setting( 'vscf-options', 'vscf-setting-14', 'sanitize_text_field' );
+
+	add_settings_field( 'vscf-field-12', __( 'Error message', 'very-simple-contact-form' ), 'vscf_field_callback_12', 'vscf', 'vscf-section-2' );
+	register_setting( 'vscf-options', 'vscf-setting-12', 'sanitize_text_field' );
 
 	add_settings_field( 'vscf-field-15', __( 'Server error message', 'very-simple-contact-form' ), 'vscf_field_callback_15', 'vscf', 'vscf-section-2' );
 	register_setting( 'vscf-options', 'vscf-setting-15', 'sanitize_text_field' );
@@ -163,22 +166,28 @@ function vscf_field_callback_11() {
 	echo "<input type='text' size='40' maxlength='50' name='vscf-setting-11' placeholder='$vscf_placeholder' value='$vscf_setting' />";
 }
 
-function vscf_field_callback_12() {
-	$vscf_placeholder = esc_attr__( 'Please enter at least 10 characters', 'very-simple-contact-form' ); 
-	$vscf_setting = esc_attr( get_option( 'vscf-setting-12' ) );
-	echo "<input type='text' size='40' maxlength='50' name='vscf-setting-12' placeholder='$vscf_placeholder' value='$vscf_setting' />";
-}
-
 function vscf_field_callback_13() {
 	$vscf_placeholder = esc_attr__( 'Please enter a valid email', 'very-simple-contact-form' ); 
 	$vscf_setting = esc_attr( get_option( 'vscf-setting-13' ) );
 	echo "<input type='text' size='40' maxlength='50' name='vscf-setting-13' placeholder='$vscf_placeholder' value='$vscf_setting' />";
 }
 
+function vscf_field_callback_20() {
+	$vscf_placeholder = esc_attr__( 'Please enter at least 2 characters', 'very-simple-contact-form' ); 
+	$vscf_setting = esc_attr( get_option( 'vscf-setting-20' ) );
+	echo "<input type='text' size='40' maxlength='50' name='vscf-setting-20' placeholder='$vscf_placeholder' value='$vscf_setting' />";
+}
+
 function vscf_field_callback_14() {
 	$vscf_placeholder = esc_attr__( 'Please enter the correct number', 'very-simple-contact-form' ); 
 	$vscf_setting = esc_attr( get_option( 'vscf-setting-14' ) );
 	echo "<input type='text' size='40' maxlength='50' name='vscf-setting-14' placeholder='$vscf_placeholder' value='$vscf_setting' />";
+}
+
+function vscf_field_callback_12() {
+	$vscf_placeholder = esc_attr__( 'Please enter at least 10 characters', 'very-simple-contact-form' ); 
+	$vscf_setting = esc_attr( get_option( 'vscf-setting-12' ) );
+	echo "<input type='text' size='40' maxlength='50' name='vscf-setting-12' placeholder='$vscf_placeholder' value='$vscf_setting' />";
 }
 
 function vscf_field_callback_15() {

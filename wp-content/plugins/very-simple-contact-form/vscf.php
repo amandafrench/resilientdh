@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Very Simple Contact Form
  * Description: This is a very simple contact form. Use shortcode [contact] to display form on page or use the widget. For more info please check readme file.
- * Version: 8.6
+ * Version: 8.8
  * Author: Guido
  * Author URI: https://www.guido.site
  * License: GNU General Public License v3 or later
@@ -40,22 +40,22 @@ add_action( 'widgets_init', 'register_vscf_widget' );
 $list_submissions_setting = esc_attr(get_option('vscf-setting-2'));
 if ($list_submissions_setting == "yes") {
 	// create submission post type
-		function vscf_custom_postype() { 
-			$vscf_args = array( 
-				'labels' => array('name' => __( 'Submissions', 'very-simple-contact-form' )), 
-				'public' => false, 
-				'can_export' => true, 
-				'show_in_nav_menus' => false, 
-				'show_ui' => true, 
-				'show_in_rest' => true, 
-				'capability_type' => 'post', 
-				'capabilities' => array('create_posts' => 'do_not_allow'), 
-				'map_meta_cap' => true, 
- 				'supports' => array('title', 'editor'), 
-			); 
-			register_post_type( 'submission', $vscf_args); 
-		}
-		add_action( 'init', 'vscf_custom_postype' ); 
+	function vscf_custom_postype() { 
+		$vscf_args = array( 
+			'labels' => array('name' => __( 'Submissions', 'very-simple-contact-form' )), 
+			'public' => false, 
+			'can_export' => true, 
+			'show_in_nav_menus' => false, 
+			'show_ui' => true, 
+			'show_in_rest' => true, 
+			'capability_type' => 'post', 
+			'capabilities' => array('create_posts' => 'do_not_allow'), 
+			'map_meta_cap' => true, 
+ 			'supports' => array('title', 'editor'), 
+		); 
+		register_post_type( 'submission', $vscf_args); 
+	}
+	add_action( 'init', 'vscf_custom_postype' ); 
 
 	// dashboard submission columns
 	function vscf_custom_columns( $columns ) { 

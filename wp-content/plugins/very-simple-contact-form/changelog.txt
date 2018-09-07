@@ -1,6 +1,20 @@
 CHANGELOG
 =========
 
+= Version 8.8 =
+* fix: captcha in file vscf-widget-form
+
+= Version 8.7 =
+* major update
+* request: added (shortcode) attributes for all field labels and form messages again
+* using an attribute will always overwrite it's corresponding settingspage field
+* added file vscf-labels (relocated labels from shortcode files to this new file)
+* added stripslashes() and htmlspecialchars_decode() filter for form and form submission
+* now unexpected backslashes are removed when using single or double quote
+* and certain HTML entities are converted to normal characters
+* changed required version to 4.7 because of new filter sanitize_textarea_field()
+* updated readme file
+
 = Version 8.6 =
 * readme file: removed donate link
 * updated theme author info

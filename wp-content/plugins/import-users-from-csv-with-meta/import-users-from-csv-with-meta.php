@@ -3,7 +3,7 @@
 Plugin Name:	Import users from CSV with meta
 Plugin URI:		https://www.codection.com
 Description:	This plugins allows to import users using CSV files to WP database automatically
-Version:		1.11.3.5
+Version:		1.11.3.9
 Author:			codection
 Author URI: 	https://codection.com
 License:     	GPL2
@@ -72,7 +72,6 @@ function acui_loader(){
 
 function acui_init(){
 	load_plugin_textdomain( 'import-users-from-csv-with-meta', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
-
 	acui_activate();
 }
 
@@ -93,6 +92,7 @@ function acui_activate(){
 	add_option( "acui_cron_path_to_move_auto_rename" );
 	add_option( "acui_cron_period" );
 	add_option( "acui_cron_role" );
+	add_option( "acui_cron_update_roles_existing_users" );
 	add_option( "acui_cron_log" );
 	add_option( "acui_cron_allow_multiple_accounts", "not_allowed" );
 	
@@ -137,6 +137,7 @@ function acui_delete_options(){
 	delete_option( "acui_cron_path_to_move_auto_rename" );
 	delete_option( "acui_cron_period" );
 	delete_option( "acui_cron_role" );
+	delete_option( "acui_cron_update_roles_existing_users" );
 	delete_option( "acui_cron_log" );
 	delete_option( "acui_cron_allow_multiple_accounts" );
 
@@ -382,7 +383,7 @@ function acui_fileupload_process( $form_data, $is_cron = false, $is_frontend  = 
 			$attach_data = wp_generate_attachment_metadata( $attach_id, $filedest );
 			wp_update_attachment_metadata( $attach_id,  $attach_data );
 			
-			acui_import_users( $filedest, $form_data, $attach_id, $is_cron );
+			acui_import_users( $filedest, $form_data, $attach_id, $is_cron, $is_frontend );
 		  }
 		}
 	  }
@@ -400,9 +401,9 @@ function acui_manage_frontend_process( $form_data ){
 	else
 		update_option( "acui_frontend_send_mail_updated", false );
 
-	update_option( "acui_frontend_role", $form_data["role-frontend"] );
+	update_option( "acui_frontend_activate_users_wp_members", $form_data["activate_users_wp_members"] );
+	update_option( "acui_frontend_role", $form_data["acui_frontend_role"] );
 	?>
-
 	<div class="updated">
        <p><?php _e( 'Settings updated correctly', 'import-users-from-csv-with-meta' ) ?></p>
     </div>
@@ -479,9 +480,9 @@ function acui_manage_cron_process( $form_data ){
 	update_option( "acui_cron_path_to_move", $form_data["path_to_move"] );
 	update_option( "acui_cron_period", $form_data["period"] );
 	update_option( "acui_cron_role", $form_data["role"] );
+	update_option( "acui_cron_update_roles_existing_users", $form_data["update-roles-existing-users"] );
 	update_option( "acui_cron_delete_users_assign_posts", $form_data["cron-delete-users-assign-posts"] );
 	?>
-
 	<div class="updated">
        <p><?php _e( 'Settings updated correctly', 'import-users-from-csv-with-meta' ) ?></p>
     </div>
@@ -494,6 +495,7 @@ function acui_cron_process(){
 	$form_data = array();
 	$form_data[ "path_to_file" ] = get_option( "acui_cron_path_to_file");
 	$form_data[ "role" ] = get_option( "acui_cron_role");
+	$form_data[ "update_roles_existing_users" ] = get_option( "acui_cron_update_roles_existing_users");
 	$form_data[ "empty_cell_action" ] = "leave";
 
 	ob_start();

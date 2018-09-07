@@ -1,9 +1,9 @@
 === Very Simple Contact Form ===
 Contributors: Guido07111975
-Version: 8.6
+Version: 8.8
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Requires at least: 3.7
+Requires at least: 4.7
 Tested up to: 4.9
 Stable tag: trunk
 Tags: simple, contact, form, contact form, email
@@ -22,6 +22,8 @@ Use a shortcode to display your form on a page or use the widget.
 
 You can personalize your form via the settingspage or by adding attributes to the shortcode or the widget.
 
+It's also possible to list form submissions in your dashboard.
+
 = How to use =
 After installation add shortcode `[contact]` on your page to display the form.
 
@@ -39,18 +41,40 @@ Via Settings > VSCF you can:
 * Disable the collection of IP address
 * Change form labels and messages
 
-Several settings can be overwritten when using the relevant (shortcode) attributes below.
+Settings and labels can be overwritten when using the relevant (shortcode) attributes below.
 
-= Shortcode attributes = 
+= Shortcode attributes =
 * Change admin email address: `[contact email_to="your-email-here"]`
 * Send to multiple email addresses: `[contact email_to="first-email-here, second-email-here"]`
 * Change "From" email header: `[contact from_header="your-email-here"]`
 * Hide subject field: `[contact hide_subject="true"]`
 * Change email subject: `[contact subject="your subject here"]`
 * Activate confirmation email to sender: `[contact auto_reply="true"]`
-* Change "thank you" message in confirmation email: `[contact auto_reply_message="your message here"]`
-* Change sending succeeded ("thank you") message: `[contact message_success="your message here"]`
 * Scroll back to form location after submit: `[contact scroll_to_form="true"]`
+
+Field labels:
+
+* Change name label: `[contact label_name="your label here"]`
+* Change email label: `[contact label_email="your label here"]`
+* Change subject label: `[contact label_subject="your label here"]`
+* Change captcha label: `[contact label_captcha="your label here"]`
+* Change message label: `[contact label_message="your label here"]`
+* Change privacy label: `[contact label_privacy="your label here"]`
+* Change submit label: `[contact label_submit="your label here"]`
+
+Field error labels:
+
+* Change name error label: `[contact error_name="your label here"]`
+* Change email error label: `[contact error_email="your label here"]`
+* Change subject error label: `[contact error_subject="your label here"]`
+* Change captcha error label: `[contact error_captcha="your label here"]`
+* Change message error label: `[contact error_message="your label here"]`
+
+Form messages:
+
+* Change sending failed message: `[contact message_error="your message here"]`
+* Change sending succeeded ("thank you") message: `[contact message_success="your message here"]`
+* Change "thank you" message in confirmation email: `[contact auto_reply_message="your message here"]`
 
 You can also add multiple attributes. Use a single whitespace to separate multiple attributes.
 
@@ -66,8 +90,8 @@ Example 1:
 
 Example 2:
 
-* If shortcode attribute is: `[contact subject="your subject here"]`
-* Widget attribute will be: `subject="your subject here"`
+* If shortcode attribute is: `[contact email_to="your-email-here" subject="your subject here"]`
+* Widget attribute will be: `email_to="your-email-here" subject="your subject here"`
 
 = List form submissions in dashboard =
 Via Settings > VSCF you can activate the listing of form submissions in your dashboard.
@@ -87,6 +111,8 @@ You should install an additional plugin for this. You could install for example:
 * [Easy WP SMTP](https://wordpress.org/plugins/easy-wp-smtp/)
 * [WP mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/)
 * [Post SMTP](https://wordpress.org/plugins/post-smtp/)
+
+Because I'm not the developer of these SMTP plugins, I will not give support. And use them at your own risk.
 
 = Question? =
 Please take a look at the FAQ section.
@@ -186,6 +212,20 @@ Please open a topic in plugin forum.
 
 
 == Changelog ==
+= Version 8.8 =
+* fix: captcha in file vscf-widget-form
+
+= Version 8.7 =
+* major update
+* request: added (shortcode) attributes for all field labels and form messages again
+* using an attribute will always overwrite it's corresponding settingspage field
+* added file vscf-labels (relocated labels from shortcode files to this new file)
+* added stripslashes() and htmlspecialchars_decode() filter for form and form submission
+* now unexpected backslashes are removed when using single or double quote
+* and certain HTML entities are converted to normal characters
+* changed required version to 4.7 because of new filter sanitize_textarea_field()
+* updated readme file
+
 = Version 8.6 =
 * readme file: removed donate link
 * updated theme author info
@@ -201,15 +241,6 @@ Please open a topic in plugin forum.
 * minor change in file vscf-style
 * updated readme file
 
-= Version 8.3 =
-* new: disable the collection of ip address (thanks Marie)
-* updated most files
-
-= Version 8.2 =
-* removed the capability to create new submission in dashboard
-* changed the id of name and email column on submissions page
-* updated file vscf
-
 For all versions please check file changelog.
 
 
@@ -219,4 +250,5 @@ For all versions please check file changelog.
 3. Very Simple Contact Form widget (Twenty Seventeen theme).
 4. Very Simple Contact Form widget (dashboard).
 5. Very Simple Contact Form settingspage (dashboard).
-6. Very Simple Contact Form submissions (dashboard).
+6. Very Simple Contact Form settingspage (dashboard).
+7. Very Simple Contact Form submissions (dashboard).
